@@ -14,13 +14,44 @@ public class Monopoly extends javax.swing.JFrame {
     int aI1Spot = 0;
     int aI2Spot = 0;
     int aI3Spot = 0;
-    int player$ = 0;
+    int player$ = 1500;
     int aI1$ = 1500;
     int aI2$ = 1500;
     int aI3$ = 1500;
-    int var = 1;
+    int var = 0;
+    int var2 = 0;
+    int var01 = 1;
+    int var02 = 1;
+    int var03 = 1;
     int owned[] = new int[28];
-    
+    int prices[] = new int[28];
+    int houses[] = new int[28];
+    int houses1[] = new int[28];
+    int houses2[] = new int[28];
+    int houses3[] = new int[28];
+    String props[] = new String[28];
+    boolean inJail = false;
+    boolean inJail1 = false;
+    boolean inJail2 = false;
+    boolean inJail3 = false;
+    int freeParking = 0;
+    boolean yes = false;
+    boolean no = false;
+    boolean buying = false;
+    String pMessage = "";
+    String aIMessage1 = "";
+    String aIMessage2 = "";
+    String aIMessage3 = "";
+    boolean endTurn1 = false;
+    boolean endTurn2 = false;
+    String pos = "";
+    String pos1 = "";
+    String pos2 = "";
+    String pos3 = "";
+    String pFormatted = "";
+    String aIFormatted1 = "";
+    String aIFormatted2 = "";
+    String aIFormatted3 = "";
     /**
      * Creates new form Monopoly
      */
@@ -83,23 +114,30 @@ public class Monopoly extends javax.swing.JFrame {
         buyBox = new javax.swing.JLabel();
         jButton44 = new javax.swing.JButton();
         jButton45 = new javax.swing.JButton();
-        playerBox = new javax.swing.JLabel();
-        computerBox1 = new javax.swing.JLabel();
-        computerBox2 = new javax.swing.JLabel();
+        aIBox1 = new javax.swing.JLabel();
+        aIBox2 = new javax.swing.JLabel();
+        aIBox3 = new javax.swing.JLabel();
         computerBox3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        playerPropBox = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        aIPropBox1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        aIPropBox2 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        playerBox1 = new javax.swing.JLabel();
+        aIPropBox3 = new javax.swing.JTextArea();
+        playerBox = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cardBox = new javax.swing.JLabel();
+        aIPosBox1 = new javax.swing.JLabel();
+        aIPosBox2 = new javax.swing.JLabel();
+        aIPosBox3 = new javax.swing.JLabel();
+        playerPosBox = new javax.swing.JLabel();
+        jButton46 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +167,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(204, 0, 204));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton5.setText("<html>Mediter- ranean Avenue</html>");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton6.setText("<html>Commun- ity Chest</html>");
@@ -136,6 +179,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(204, 0, 204));
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton7.setText("<html>Baltic Avenue</html>");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton8.setText("<html>Income Tax</html>");
@@ -148,6 +196,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton10.setText("<html>Orental Avenue</html>");
         jButton10.setToolTipText("");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton11.setText("<html>Chance</html>");
@@ -155,6 +208,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton12.setBackground(new java.awt.Color(0, 255, 255));
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton12.setText("<html>Vermont Avenue</html>");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setBackground(new java.awt.Color(0, 255, 255));
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -168,17 +226,32 @@ public class Monopoly extends javax.swing.JFrame {
         jButton14.setBackground(new java.awt.Color(255, 51, 255));
         jButton14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton14.setText("<html>St. Charles Place</html>");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton15.setText("<html>Electric Company</html>");
 
         jButton16.setBackground(new java.awt.Color(255, 51, 255));
         jButton16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton16.setText("<html>State Avenue</html>");
+        jButton16.setText("<html>States Avenue</html>");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setBackground(new java.awt.Color(255, 51, 255));
         jButton17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton17.setText("<html>Virginia Avenue</html>");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton18.setBackground(new java.awt.Color(255, 255, 255));
         jButton18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -187,6 +260,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton19.setBackground(new java.awt.Color(255, 153, 0));
         jButton19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton19.setText("<html>St. James Place</html>");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
 
         jButton20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton20.setText("<html>Community Chest</html>");
@@ -194,14 +272,29 @@ public class Monopoly extends javax.swing.JFrame {
         jButton21.setBackground(new java.awt.Color(255, 153, 0));
         jButton21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton21.setText("<html>Tennessee Avenue</html>");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         jButton22.setBackground(new java.awt.Color(255, 153, 0));
         jButton22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton22.setText("<html>New York Avenue</html>");
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
 
         jButton23.setBackground(new java.awt.Color(255, 255, 0));
         jButton23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton23.setText("<html>Marvin Gardens</html>");
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
 
         jButton24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton24.setText("<html>Water Works</html>");
@@ -209,10 +302,20 @@ public class Monopoly extends javax.swing.JFrame {
         jButton25.setBackground(new java.awt.Color(255, 255, 0));
         jButton25.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton25.setText("<html>Ventnor Avenue</html>");
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton26.setBackground(new java.awt.Color(255, 255, 0));
         jButton26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton26.setText("<html>Atlantic Avenue</html>");
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
 
         jButton27.setBackground(new java.awt.Color(255, 255, 255));
         jButton27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -221,10 +324,20 @@ public class Monopoly extends javax.swing.JFrame {
         jButton28.setBackground(new java.awt.Color(255, 0, 0));
         jButton28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton28.setText("<html>Illinois Avenue</html>");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
 
         jButton29.setBackground(new java.awt.Color(255, 0, 0));
         jButton29.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton29.setText("<html>Indiana Avenue</html>");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
 
         jButton30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton30.setText("<html>Chance</html>");
@@ -232,14 +345,29 @@ public class Monopoly extends javax.swing.JFrame {
         jButton31.setBackground(new java.awt.Color(255, 0, 0));
         jButton31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton31.setText("<html>Kentucky Avenue</html>");
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
 
         jButton32.setBackground(new java.awt.Color(0, 153, 0));
         jButton32.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton32.setText("<html>Pacific Avenue</html>");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
 
         jButton33.setBackground(new java.awt.Color(0, 153, 0));
         jButton33.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton33.setText("<html>North Carolina Avenue</html>");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
 
         jButton34.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton34.setText("<html>Community Chest</html>");
@@ -247,6 +375,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton35.setBackground(new java.awt.Color(0, 153, 0));
         jButton35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton35.setText("<html>Pennsyl- vania Avenue</html>");
+        jButton35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton35ActionPerformed(evt);
+            }
+        });
 
         jButton36.setBackground(new java.awt.Color(255, 255, 255));
         jButton36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -258,6 +391,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton38.setBackground(new java.awt.Color(51, 51, 255));
         jButton38.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton38.setText("<html>Park Place</html>");
+        jButton38.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton38ActionPerformed(evt);
+            }
+        });
 
         jButton39.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton39.setText("<html>Luxury Tax</html>");
@@ -270,6 +408,11 @@ public class Monopoly extends javax.swing.JFrame {
         jButton40.setBackground(new java.awt.Color(51, 51, 255));
         jButton40.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton40.setText("<html>Boardwalk</html>");
+        jButton40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton40ActionPerformed(evt);
+            }
+        });
 
         jButton41.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton41.setText("Roll");
@@ -281,6 +424,11 @@ public class Monopoly extends javax.swing.JFrame {
 
         jButton42.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton42.setText("Chance");
+        jButton42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton42ActionPerformed(evt);
+            }
+        });
 
         jButton43.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton43.setText("Community Chest");
@@ -313,26 +461,26 @@ public class Monopoly extends javax.swing.JFrame {
             }
         });
 
-        playerBox.setBackground(new java.awt.Color(0, 0, 0));
-        playerBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        playerBox.setForeground(new java.awt.Color(255, 255, 255));
-        playerBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        playerBox.setText("A.I. 1: $1500");
-        playerBox.setOpaque(true);
+        aIBox1.setBackground(new java.awt.Color(0, 0, 0));
+        aIBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIBox1.setForeground(new java.awt.Color(255, 255, 255));
+        aIBox1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIBox1.setText("A.I. 1: $1500");
+        aIBox1.setOpaque(true);
 
-        computerBox1.setBackground(new java.awt.Color(0, 0, 0));
-        computerBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        computerBox1.setForeground(new java.awt.Color(255, 255, 255));
-        computerBox1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        computerBox1.setText("A.I. 2: $1500");
-        computerBox1.setOpaque(true);
+        aIBox2.setBackground(new java.awt.Color(0, 0, 0));
+        aIBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIBox2.setForeground(new java.awt.Color(255, 255, 255));
+        aIBox2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIBox2.setText("A.I. 2: $1500");
+        aIBox2.setOpaque(true);
 
-        computerBox2.setBackground(new java.awt.Color(0, 0, 0));
-        computerBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        computerBox2.setForeground(new java.awt.Color(255, 255, 255));
-        computerBox2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        computerBox2.setText("A.I. 3: $1500");
-        computerBox2.setOpaque(true);
+        aIBox3.setBackground(new java.awt.Color(0, 0, 0));
+        aIBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIBox3.setForeground(new java.awt.Color(255, 255, 255));
+        aIBox3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIBox3.setText("A.I. 3: $1500");
+        aIBox3.setOpaque(true);
 
         computerBox3.setBackground(new java.awt.Color(0, 0, 0));
         computerBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -355,28 +503,71 @@ public class Monopoly extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("A.I. 3");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        playerPropBox.setColumns(20);
+        playerPropBox.setRows(5);
+        jScrollPane1.setViewportView(playerPropBox);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        aIPropBox1.setColumns(20);
+        aIPropBox1.setRows(5);
+        jScrollPane2.setViewportView(aIPropBox1);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        aIPropBox2.setColumns(20);
+        aIPropBox2.setRows(5);
+        jScrollPane3.setViewportView(aIPropBox2);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
+        aIPropBox3.setColumns(20);
+        aIPropBox3.setRows(5);
+        jScrollPane4.setViewportView(aIPropBox3);
 
-        playerBox1.setBackground(new java.awt.Color(0, 0, 0));
-        playerBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        playerBox1.setForeground(new java.awt.Color(255, 255, 255));
-        playerBox1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        playerBox1.setText("Player: $1500");
-        playerBox1.setOpaque(true);
+        playerBox.setBackground(new java.awt.Color(0, 0, 0));
+        playerBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        playerBox.setForeground(new java.awt.Color(255, 255, 255));
+        playerBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        playerBox.setText("Player: $1500");
+        playerBox.setOpaque(true);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Chest/Chance Card:");
+
+        cardBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cardBox.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        cardBox.setOpaque(true);
+
+        aIPosBox1.setBackground(new java.awt.Color(0, 0, 0));
+        aIPosBox1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIPosBox1.setForeground(new java.awt.Color(255, 255, 255));
+        aIPosBox1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIPosBox1.setText("A.I.Pos 1: Go!");
+        aIPosBox1.setOpaque(true);
+
+        aIPosBox2.setBackground(new java.awt.Color(0, 0, 0));
+        aIPosBox2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIPosBox2.setForeground(new java.awt.Color(255, 255, 255));
+        aIPosBox2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIPosBox2.setText("A.I.Pos 2: Go!");
+        aIPosBox2.setOpaque(true);
+
+        aIPosBox3.setBackground(new java.awt.Color(0, 0, 0));
+        aIPosBox3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        aIPosBox3.setForeground(new java.awt.Color(255, 255, 255));
+        aIPosBox3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        aIPosBox3.setText("A.I.Pos 3: Go!");
+        aIPosBox3.setOpaque(true);
+
+        playerPosBox.setBackground(new java.awt.Color(0, 0, 0));
+        playerPosBox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        playerPosBox.setForeground(new java.awt.Color(255, 255, 255));
+        playerPosBox.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        playerPosBox.setText("PlayerPos: Go!");
+        playerPosBox.setOpaque(true);
+
+        jButton46.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton46.setText("End Turn");
+        jButton46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton46ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -385,26 +576,77 @@ public class Monopoly extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(156, 156, 156)
+                                        .addComponent(playerPosBox, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(30, 30, 30)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(24, 24, 24)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                            .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(buyBox, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(97, 97, 97))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(aIBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(aIBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(aIBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(playerBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(aIPosBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(aIPosBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(aIPosBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,121 +659,115 @@ public class Monopoly extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(buyBox, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(playerBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(computerBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(computerBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(playerBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(computerBox3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cardBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton34, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton36, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton37, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton38, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton39, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton40, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(computerBox3)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(computerBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(587, 587, 587))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(playerBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(computerBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(playerBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(computerBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(computerBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(57, 57, 57)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(playerBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(playerPosBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIPosBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIPosBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(aIPosBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -540,36 +776,20 @@ public class Monopoly extends javax.swing.JFrame {
                                         .addComponent(buyBox)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton44, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jButton44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton45, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(74, 74, 74)
-                                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(206, 206, 206)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -580,91 +800,7831 @@ public class Monopoly extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(1, 1, 1)
+                .addComponent(cardBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+        if(owned[3] == 1 && owned[4] == 1 && owned[5] == 1 && player$ >= 50 && houses[5] < 5){
+            player$ -= 50;
+            houses[5]++;
+        }
     }//GEN-LAST:event_jButton13ActionPerformed
-
     private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton39ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton39ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton45ActionPerformed
-        // TODO add your handling code here:
+        if(buying){
+            no = true;
+            playerTurn();
+            endTurn2 = true;
+        }
     }//GEN-LAST:event_jButton45ActionPerformed
-
     private void jButton44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton44ActionPerformed
-        // TODO add your handling code here:
+        if(buying){
+            yes = true;
+            playerTurn();
+            endTurn2 = true;
+        }
     }//GEN-LAST:event_jButton44ActionPerformed
-
     private void jButton41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton41ActionPerformed
-        roll = (int) (Math.random() * 12) + 1;
-        playerSpot += roll;
-        if( playerSpot%40 == 0 || playerSpot >= 40 * var){
+        if(var == 0){
+            setUp();
+        }
+        if(buying == false && endTurn1 == false){
+            if(inJail == false){
+            roll = (int) (Math.random() * 11) + 2;
+            playerSpot += roll;
+            }
+            playerTurn();
+            endTurn1 = true;
+        }
+        
+    }//GEN-LAST:event_jButton41ActionPerformed
+    private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
+        if(var2 == 1){
+            communityChest();
+            endTurn2 = true;
+        }
+        var2 = 0;
+    }//GEN-LAST:event_jButton43ActionPerformed
+    private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton42ActionPerformed
+        if(var2 == 2){
+            chance();
+            endTurn2 = true;
+        }
+        var2 = 0;
+    }//GEN-LAST:event_jButton42ActionPerformed
+    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
+        if(endTurn1 == true && endTurn2 == true){
+            endTurn1 = false;
+            endTurn2 = false;
+            aI1Turn();
+            //aI2Turn();
+            aI3Turn();
+        }
+    }//GEN-LAST:event_jButton46ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(owned[0] == 1 && owned[1] == 1 && player$ >= 50 && houses[0] < 5){
+            player$ -= 50;
+            houses[0]++;
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(owned[0] == 1 && owned[1] == 1 && player$ >= 50 && houses[1] < 5){
+            player$ -= 50;
+            houses[1]++;
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        if(owned[3] == 1 && owned[4] == 1 && owned[5] == 1 && player$ >= 50 && houses[3] < 5){
+            player$ -= 50;
+            houses[3]++;
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        if(owned[3] == 1 && owned[4] == 1 && owned[5] == 1 && player$ >= 50 && houses[4] < 5){
+            player$ -= 50;
+            houses[4]++;
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        if(owned[6] == 1 && owned[8] == 1 && owned[9] == 1 && player$ >= 100 && houses[6] < 5){
+            player$ -= 100;
+            houses[6]++;
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        if(owned[6] == 1 && owned[8] == 1 && owned[9] == 1 && player$ >= 100 && houses[8] < 5){
+            player$ -= 100;
+            houses[8]++;
+        }
+    }//GEN-LAST:event_jButton16ActionPerformed
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        if(owned[6] == 1 && owned[8] == 1 && owned[9] == 1 && player$ >= 100 && houses[9] < 5){
+            player$ -= 100;
+            houses[9]++;
+        }
+    }//GEN-LAST:event_jButton17ActionPerformed
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        if(owned[11] == 1 && owned[12] == 1 && owned[13] == 1 && player$ >= 100 && houses[11] < 5){
+            player$ -= 100;
+            houses[11]++;
+        }
+    }//GEN-LAST:event_jButton19ActionPerformed
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        if(owned[11] == 1 && owned[12] == 1 && owned[13] == 1 && player$ >= 100 && houses[12] < 5){
+            player$ -= 100;
+            houses[12]++;
+        }
+    }//GEN-LAST:event_jButton21ActionPerformed
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        if(owned[11] == 1 && owned[12] == 1 && owned[13] == 1 && player$ >= 100 && houses[13] < 5){
+            player$ -= 100;
+            houses[13]++;
+        }
+    }//GEN-LAST:event_jButton22ActionPerformed
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+        if(owned[14] == 1 && owned[15] == 1 && owned[16] == 1 && player$ >= 150 && houses[14] < 5){
+            player$ -= 150;
+            houses[14]++;
+        }
+    }//GEN-LAST:event_jButton31ActionPerformed
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        if(owned[14] == 1 && owned[15] == 1 && owned[16] == 1 && player$ >= 150 && houses[15] < 5){
+            player$ -= 150;
+            houses[15]++;
+        }
+    }//GEN-LAST:event_jButton29ActionPerformed
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        if(owned[14] == 1 && owned[15] == 1 && owned[16] == 1 && player$ >= 150 && houses[16] < 5){
+            player$ -= 150;
+            houses[16]++;
+        }
+    }//GEN-LAST:event_jButton28ActionPerformed
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        if(owned[18] == 1 && owned[19] == 1 && owned[21] == 1 && player$ >= 150 && houses[18] < 5){
+            player$ -= 150;
+            houses[18]++;
+        }
+    }//GEN-LAST:event_jButton26ActionPerformed
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        if(owned[18] == 1 && owned[19] == 1 && owned[21] == 1 && player$ >= 150 && houses[19] < 5){
+            player$ -= 150;
+            houses[19]++;
+        }
+    }//GEN-LAST:event_jButton25ActionPerformed
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        if(owned[18] == 1 && owned[19] == 1 && owned[21] == 1 && player$ >= 150 && houses[21] < 5){
+            player$ -= 150;
+            houses[21]++;
+        }
+    }//GEN-LAST:event_jButton23ActionPerformed
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+        if(owned[22] == 1 && owned[23] == 1 && owned[24] == 1 && player$ >= 200 && houses[22] < 5){
+            player$ -= 200;
+            houses[22]++;
+        }
+    }//GEN-LAST:event_jButton32ActionPerformed
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        if(owned[22] == 1 && owned[23] == 1 && owned[24] == 1 && player$ >= 200 && houses[23] < 5){
+            player$ -= 200;
+            houses[23]++;
+        }
+    }//GEN-LAST:event_jButton33ActionPerformed
+    private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton35ActionPerformed
+        if(owned[22] == 1 && owned[23] == 1 && owned[24] == 1 && player$ >= 200 && houses[24] < 5){
+            player$ -= 200;
+            houses[24]++;
+        }
+    }//GEN-LAST:event_jButton35ActionPerformed
+    private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton38ActionPerformed
+        if(owned[26] == 1 && owned[27] == 1 && player$ >= 200 && houses[26] < 5){
+            player$ -= 200;
+            houses[26]++;
+        }
+    }//GEN-LAST:event_jButton38ActionPerformed
+    private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton40ActionPerformed
+        if(owned[26] == 1 && owned[27] == 1 && player$ >= 200 && houses[27] < 5){
+            player$ -= 200;
+            houses[27]++;
+        }
+    }//GEN-LAST:event_jButton40ActionPerformed
+    public void setUp(){
+        var = 1;
+        for(int i = 0; i < 28; i++){
+            owned[i] = 0;
+            houses[i] = 0;
+            houses1[i] = 0;
+            houses2[i] = 0;
+            houses3[i] = 0;
+        }
+        prices[0] = 60;
+        prices[1] = 80;
+        prices[2] = 200;
+        prices[3] = 100;
+        prices[4] = 100;
+        prices[5] = 120;
+        prices[6] = 140;
+        prices[7] = 150;
+        prices[8] = 140;
+        prices[9] = 180;
+        prices[10] = 200;
+        prices[11] = 180;
+        prices[12] = 180;
+        prices[13] = 200;
+        prices[14] = 220;
+        prices[15] = 220;
+        prices[16] = 240;
+        prices[17] = 200;
+        prices[18] = 260;
+        prices[19] = 260;
+        prices[20] = 150;
+        prices[21] = 280;
+        prices[22] = 300;
+        prices[23] = 300;
+        prices[24] = 320;
+        prices[25] = 200;
+        prices[26] = 350;
+        prices[27] = 400;
+        /////////////////
+        props[0] = "Mediterranean Avenue";
+        props[1] = "Baltic Avenue";
+        props[2] = "Reading Railroad";
+        props[3] = "Oriental Avenue";
+        props[4] = "Vermont Avenue";
+        props[5] = "Connecticut Avenue";
+        props[6] = "St. Charles Place";
+        props[7] = "Electric Company";
+        props[8] = "States Avenue";
+        props[9] = "Virginia Avenue";
+        props[10] = "Pennsylvania Railroad";
+        props[11] = "St. James Place";
+        props[12] = "Tennesse Avenue";
+        props[13] = "New York Avenue";
+        props[14] = "Kentucky Avenue";
+        props[15] = "Indiana Avenue";
+        props[16] = "Illinois Avenue";
+        props[17] = "B.& O. Railroad";
+        props[18] = "Atlantic Avenue";
+        props[19] = "Ventnor Avenue";
+        props[20] = "Water Works";
+        props[21] = "Marvin Gardens";
+        props[22] = "Pacific Avenue";
+        props[23] = "North Carolina Avenue";
+        props[24] = "Pennsylvania Avenue";
+        props[25] = "Short Line Railroad";
+        props[26] = "Park Place";
+        props[27] = "Boardwalk";
+    }
+    public void playerTurn(){
+        if( playerSpot%40 == 0 || playerSpot > 40 * var){
             player$ += 200;
             var++;
         }
+        if( playerSpot%40 == 0){
+            pos = "Go!";
+            playerPosBox.setText("PlayerPos: " + pos);
+            endTurn2 = true;
+        }
         if( playerSpot%40 == 1){
+            pos = "Mediterranean Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
             if(owned[0] == 0){
-                buyBox.setText("Buy For: ");
+                buyBox.setText("Buy For: " + prices[0]);
+                buying = true;
+                if(yes){
+                    owned[0] = 1;
+                    player$ -= prices[0];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[0] == 1){
+                endTurn2 = true;
+            }
+            if(owned[0] == 2){
+                if(houses1[0] == 0){
+                    player$ -= 2;
+                    aI1$ += 2;
+                }
+                if(houses1[0] == 1){
+                    player$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[0] == 2){
+                    player$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[0] == 3){
+                    player$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[0] == 4){
+                    player$ -= 160;
+                    aI1$ += 160;
+                }
+                if(houses1[0] == 5){
+                    player$ -= 250;
+                    aI1$ += 250;
+                }
+                endTurn2 = true;
+            }
+            if(owned[0] == 3){
+                if(houses2[0] == 0){
+                    player$ -= 2;
+                    aI2$ += 2;
+                }
+                if(houses2[0] == 1){
+                    player$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[0] == 2){
+                    player$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[0] == 3){
+                    player$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[0] == 4){
+                    player$ -= 160;
+                    aI2$ += 160;
+                }
+                if(houses2[0] == 5){
+                    player$ -= 250;
+                    aI2$ += 250;
+                }
+                endTurn2 = true;
+            }
+            if(owned[0] == 4){
+                if(houses3[0] == 0){
+                    player$ -= 2;
+                    aI3$ += 2;
+                }
+                if(houses3[0] == 1){
+                    player$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[0] == 2){
+                    player$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[0] == 3){
+                    player$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[0] == 4){
+                    player$ -= 160;
+                    aI3$ += 160;
+                }
+                if(houses3[0] == 5){
+                    player$ -= 250;
+                    aI3$ += 250;
+                }
+                endTurn2 = true;
             }
         }
-    }//GEN-LAST:event_jButton41ActionPerformed
-
-    private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton43ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton43ActionPerformed
-    
-    public void aITurns(){
+        if( playerSpot%40 == 2){
+            var2 = 1;
+            pos = "Community Chest";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 3){
+            pos = "Baltic Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[1] == 0){
+                buyBox.setText("Buy For: " + prices[1]);
+                buying = true;
+                if(yes){
+                    owned[1] = 1;
+                    player$ -= prices[1];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[1] == 1){
+                endTurn2 = true;
+            }
+            if(owned[1] == 2){
+                if(houses1[1] == 0){
+                    player$ -= 4;
+                    aI1$ += 4;
+                }
+                if(houses1[1] == 1){
+                    player$ -= 20;
+                    aI1$ += 20;
+                }
+                if(houses1[1] == 2){
+                    player$ -= 60;
+                    aI1$ += 60;
+                }
+                if(houses1[1] == 3){
+                    player$ -= 180;
+                    aI1$ += 180;
+                }
+                if(houses1[1] == 4){
+                    player$ -= 320;
+                    aI1$ += 320;
+                }
+                if(houses1[1] == 5){
+                    player$ -= 450;
+                    aI1$ += 450;
+                }
+                endTurn2 = true;
+            }
+            if(owned[1] == 3){
+                if(houses2[1] == 0){
+                    player$ -= 4;
+                    aI2$ += 4;
+                }
+                if(houses2[1] == 1){
+                    player$ -= 20;
+                    aI2$ += 20;
+                }
+                if(houses2[1] == 2){
+                    player$ -= 60;
+                    aI2$ += 60;
+                }
+                if(houses2[1] == 3){
+                    player$ -= 180;
+                    aI2$ += 180;
+                }
+                if(houses2[1] == 4){
+                    player$ -= 320;
+                    aI2$ += 320;
+                }
+                if(houses2[1] == 5){
+                    player$ -= 450;
+                    aI2$ += 450;
+                }
+                endTurn2 = true;
+            }
+            if(owned[1] == 4){
+                if(houses3[1] == 0){
+                    player$ -= 4;
+                    aI3$ += 4;
+                }
+                if(houses3[1] == 1){
+                    player$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses3[1] == 2){
+                    player$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[1] == 3){
+                    player$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[1] == 4){
+                    player$ -= 320;
+                    aI3$ += 320;
+                }
+                if(houses3[1] == 5){
+                    player$ -= 450;
+                    aI3$ += 450;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 4){
+            player$ -= 200;
+            freeParking += 200;
+            pos = "Income Tax";
+            playerPosBox.setText("PlayerPos: " + pos);
+            endTurn2 = true;
+        }
+        if( playerSpot%40 == 5){
+            pos = "Reading Railroad";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[2] == 0){
+                buyBox.setText("Buy For: " + prices[2]);
+                buying = true;
+                if(yes){
+                    owned[2] = 1;
+                    player$ -= prices[2];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[2] == 1){
+                endTurn2 = true;
+            }
+            if(owned[2] == 2){
+                if(owned[10] == 2 && owned[17] == 2 && owned[25] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[10] == 2 && owned[17] == 2) || (owned[10] == 2 && owned[25] == 2) || owned[17] == 2 && owned[25] == 2){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[10] == 2 || owned[17] == 2 || owned[25] == 2){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                else player$ -= 25;
+                     aI1$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[2] == 3){
+                if(owned[10] == 3 && owned[17] == 3 && owned[25] == 3){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[10] == 3 && owned[17] == 3) || (owned[10] == 3 && owned[25] == 3) || owned[17] == 3 && owned[25] == 3){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[10] == 3 || owned[17] == 3 || owned[25] == 3){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                else player$ -= 25;
+                     aI2$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[2] == 4){
+                if(owned[10] == 4 && owned[17] == 4 && owned[25] == 4){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[10] == 4 && owned[17] == 4) || (owned[10] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[10] == 4 || owned[17] == 4 || owned[25] == 4){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                else player$ -= 25;
+                     aI3$ += 25;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 6){
+            pos = "Oriental Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[3] == 0){
+                buyBox.setText("Buy For: " + prices[3]);
+                buying = true;
+                if(yes){
+                    owned[3] = 1;
+                    player$ -= prices[4];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[3] == 1){
+                endTurn2 = true;
+            }
+            if(owned[3] == 2){
+                if(houses1[3] == 0){
+                    player$ -= 6;
+                    aI1$ += 6;
+                }
+                if(houses1[3] == 1){
+                    player$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[3] == 2){
+                    player$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[3] == 3){
+                    player$ -= 270;
+                    aI1$ += 270;
+                }
+                if(houses1[3] == 4){
+                    player$ -= 400;
+                    aI1$ += 400;
+                }
+                if(houses1[3] == 5){
+                    player$ -= 550;
+                    aI1$ += 550;
+                }
+                endTurn2 = true;
+            }
+            if(owned[3] == 3){
+                if(houses2[3] == 0){
+                    player$ -= 6;
+                    aI2$ += 6;
+                }
+                if(houses2[3] == 1){
+                    player$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[3] == 2){
+                    player$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[3] == 3){
+                    player$ -= 270;
+                    aI2$ += 270;
+                }
+                if(houses2[3] == 4){
+                    player$ -= 400;
+                    aI2$ += 400;
+                }
+                if(houses2[3] == 5){
+                    player$ -= 550;
+                    aI2$ += 550;
+                }
+                endTurn2 = true;
+            }
+            if(owned[3] == 4){
+                if(houses3[3] == 0){
+                    player$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[3] == 1){
+                    player$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[3] == 2){
+                    player$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[3] == 3){
+                    player$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[3] == 4){
+                    player$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[3] == 5){
+                    player$ -= 550;
+                    aI3$ += 550;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 7){
+            var2 = 2;
+            pos = "Chance";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 8){
+            pos = "Vermont Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[4] == 0){
+                buyBox.setText("Buy For: " + prices[4]);
+                buying = true;
+                if(yes){
+                    owned[4] = 1;
+                    player$ -= prices[4];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[4] == 1){
+                endTurn2 = true;
+            }
+            if(owned[4] == 2){
+                if(houses1[4] == 0){
+                    player$ -= 6;
+                    aI1$ += 6;
+                }
+                if(houses1[4] == 1){
+                    player$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[4] == 2){
+                    player$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[4] == 3){
+                    player$ -= 270;
+                    aI1$ += 270;
+                }
+                if(houses1[4] == 4){
+                    player$ -= 400;
+                    aI1$ += 400;
+                }
+                if(houses1[4] == 5){
+                    player$ -= 550;
+                    aI1$ += 550;
+                }
+                endTurn2 = true;
+            }
+            if(owned[4] == 3){
+                if(houses2[4] == 0){
+                    player$ -= 6;
+                    aI2$ += 6;
+                }
+                if(houses2[4] == 1){
+                    player$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[4] == 2){
+                    player$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[4] == 3){
+                    player$ -= 270;
+                    aI2$ += 270;
+                }
+                if(houses2[4] == 4){
+                    player$ -= 400;
+                    aI2$ += 400;
+                }
+                if(houses2[4] == 5){
+                    player$ -= 550;
+                    aI2$ += 550;
+                }
+                endTurn2 = true;
+            }
+            if(owned[4] == 4){
+                if(houses3[4] == 0){
+                    player$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[4] == 1){
+                    player$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[4] == 2){
+                    player$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[4] == 3){
+                    player$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[4] == 4){
+                    player$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[4] == 5){
+                    player$ -= 550;
+                    aI3$ += 550;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 9){
+            pos = "Connecticut Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[5] == 0){
+                buyBox.setText("Buy For: " + prices[5]);
+                buying = true;
+                if(yes){
+                    owned[5] = 1;
+                    player$ -= prices[5];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[5] == 1){
+                endTurn2 = true;
+            }
+            if(owned[5] == 2){
+                if(houses1[5] == 0){
+                    player$ -= 8;
+                    aI1$ += 8;
+                }
+                if(houses1[5] == 1){
+                    player$ -= 40;
+                    aI1$ += 40;
+                }
+                if(houses1[5] == 2){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                if(houses1[5] == 3){
+                    player$ -= 300;
+                    aI1$ += 300;
+                }
+                if(houses1[5] == 4){
+                    player$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[5] == 5){
+                    player$ -= 600;
+                    aI1$ += 600;
+                }
+                endTurn2 = true;
+            }
+            if(owned[5] == 3){
+                if(houses2[5] == 0){
+                    player$ -= 8;
+                    aI2$ += 8;
+                }
+                if(houses2[5] == 1){
+                    player$ -= 40;
+                    aI2$ += 40;
+                }
+                if(houses2[5] == 2){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                if(houses2[5] == 3){
+                    player$ -= 300;
+                    aI2$ += 300;
+                }
+                if(houses2[5] == 4){
+                    player$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[5] == 5){
+                    player$ -= 600;
+                    aI2$ += 600;
+                }
+                endTurn2 = true;
+            }
+            if(owned[5] == 4){
+                if(houses3[5] == 0){
+                    player$ -= 8;
+                    aI3$ += 8;
+                }
+                if(houses3[5] == 1){
+                    player$ -= 40;
+                    aI3$ += 40;
+                }
+                if(houses3[5] == 2){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses3[5] == 3){
+                    player$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses3[5] == 4){
+                    player$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[5] == 5){
+                    player$ -= 600;
+                    aI3$ += 600;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 10){
+            pos = "Just Visiting";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(inJail){
+                for(int i = 0; i < 3; i++){
+                    if((int) (Math.random() * 6) == (int) (Math.random() * 6)){
+                        inJail = false;
+                    }
+                }
+                pos = "Jail";
+                playerPosBox.setText("PlayerPos: " + pos);
+            }
+            
+            endTurn2 = true;
+        }
+        if( playerSpot%40 == 11){
+            pos = "St. Charles place";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[6] == 0){
+                buyBox.setText("Buy For: " + prices[6]);
+                buying = true;
+                if(yes){
+                    owned[6] = 1;
+                    player$ -= prices[6];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[6] == 1){
+                endTurn2 = true;
+            }
+            if(owned[6] == 2){
+                if(houses1[6] == 0){
+                    player$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[6] == 1){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                if(houses1[6] == 2){
+                    player$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[6] == 3){
+                    player$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[6] == 4){
+                    player$ -= 625;
+                    aI1$ += 625;
+                }
+                if(houses1[6] == 5){
+                    player$ -= 750;
+                    aI1$ += 750;
+                }
+                endTurn2 = true;
+            }
+            if(owned[6] == 3){
+                if(houses2[6] == 0){
+                    player$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[6] == 1){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[6] == 2){
+                    player$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[6] == 3){
+                    player$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[6] == 4){
+                    player$ -= 625;
+                    aI2$ += 625;
+                }
+                if(houses2[6] == 5){
+                    player$ -= 750;
+                    aI2$ += 750;
+                }
+                endTurn2 = true;
+            }
+            if(owned[6] == 4){
+                if(houses3[6] == 0){
+                    player$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[6] == 1){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[6] == 2){
+                    player$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[6] == 3){
+                    player$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[6] == 4){
+                    player$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[6] == 5){
+                    player$ -= 750;
+                    aI3$ += 750;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 12){
+            pos = "Electric Company";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[7] == 0){
+                buyBox.setText("Buy For: " + prices[7]);
+                buying = true;
+                if(yes){
+                    owned[7] = 1;
+                    player$ -= prices[7];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[7] == 1){
+                endTurn2 = true;
+            }
+            if(owned[7] == 2){
+                if(owned[20] == 2){
+                    player$ -= roll * 10;
+                    aI1$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI1$ += roll * 4;
+                endTurn2 = true;
+            }
+            if(owned[7] == 3){
+                if(owned[20] == 3){
+                    player$ -= roll * 10;
+                    aI2$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI2$ += roll * 4;
+                endTurn2 = true;
+            }
+            if(owned[7] == 4){
+                if(owned[20] == 4){
+                    player$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI3$ += roll * 4;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 13){
+            pos = "States Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[8] == 0){
+                buyBox.setText("Buy For: " + prices[8]);
+                buying = true;
+                if(yes){
+                    owned[8] = 1;
+                    player$ -= prices[8];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[8] == 1){
+                endTurn2 = true;
+            }
+            if(owned[8] == 2){
+                if(houses1[8] == 0){
+                    player$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[8] == 1){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                if(houses1[8] == 2){
+                    player$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[8] == 3){
+                    player$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[8] == 4){
+                    player$ -= 625;
+                    aI1$ += 625;
+                }
+                if(houses1[8] == 5){
+                    player$ -= 750;
+                    aI1$ += 750;
+                }
+                endTurn2 = true;
+            }
+            if(owned[8] == 3){
+                if(houses2[8] == 0){
+                    player$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[8] == 1){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[8] == 2){
+                    player$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[8] == 3){
+                    player$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[8] == 4){
+                    player$ -= 625;
+                    aI2$ += 625;
+                }
+                if(houses2[8] == 5){
+                    player$ -= 750;
+                    aI2$ += 750;
+                }
+                endTurn2 = true;
+            }
+            if(owned[8] == 4){
+                if(houses3[8] == 0){
+                    player$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[8] == 1){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[8] == 2){
+                    player$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[8] == 3){
+                    player$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[8] == 4){
+                    player$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[8] == 5){
+                    player$ -= 750;
+                    aI3$ += 750;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 14){
+            pos = "Virgina Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[9] == 0){
+                buyBox.setText("Buy For: " + prices[9]);
+                buying = true;
+                if(yes){
+                    owned[9] = 1;
+                    player$ -= prices[9];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[9] == 1){
+                endTurn2 = true;
+            }
+            if(owned[9] == 2){
+                if(houses1[9] == 0){
+                    player$ -= 12;
+                    aI1$ += 12;
+                }
+                if(houses1[9] == 1){
+                    player$ -= 60;
+                    aI1$ += 60;
+                }
+                if(houses1[9] == 2){
+                    player$ -= 180;
+                    aI1$ += 180;
+                }
+                if(houses1[9] == 3){
+                    player$ -= 500;
+                    aI1$ += 500;
+                }
+                if(houses1[9] == 4){
+                    player$ -= 1700;
+                    aI1$ += 700;
+                }
+                if(houses1[9] == 5){
+                    player$ -= 900;
+                    aI1$ += 900;
+                }
+                endTurn2 = true;
+            }
+            if(owned[9] == 3){
+                if(houses2[9] == 0){
+                    player$ -= 12;
+                    aI2$ += 12;
+                }
+                if(houses2[9] == 1){
+                    player$ -= 60;
+                    aI2$ += 60;
+                }
+                if(houses2[9] == 2){
+                    player$ -= 180;
+                    aI2$ += 180;
+                }
+                if(houses2[9] == 3){
+                    player$ -= 500;
+                    aI2$ += 500;
+                }
+                if(houses2[9] == 4){
+                    player$ -= 1700;
+                    aI2$ += 700;
+                }
+                if(houses2[9] == 5){
+                    player$ -= 900;
+                    aI2$ += 900;
+                }
+                endTurn2 = true;
+            }
+            if(owned[9] == 4){
+                if(houses3[9] == 0){
+                    player$ -= 12;
+                    aI3$ += 12;
+                }
+                if(houses3[9] == 1){
+                    player$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[9] == 2){
+                    player$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[9] == 3){
+                    player$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[9] == 4){
+                    player$ -= 1700;
+                    aI3$ += 700;
+                }
+                if(houses3[9] == 5){
+                    player$ -= 900;
+                    aI3$ += 900;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 15){
+            pos = "Pennsylvania Railroad";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[10] == 0){
+                buyBox.setText("Buy For: " + prices[10]);
+                buying = true;
+                if(yes){
+                    owned[10] = 1;
+                    player$ -= prices[10];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[10] == 1){
+                endTurn2 = true;
+            }
+            if(owned[10] == 2){
+                if(owned[2] == 2 && owned[17] == 2 && owned[25] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[17] == 2) || (owned[2] == 2 && owned[25] == 2) || owned[17] == 2 && owned[25] == 2){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[17] == 2 || owned[25] == 2){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                else player$ -= 25;
+                     aI1$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[10] == 3){
+                if(owned[2] == 3 && owned[17] == 3 && owned[25] == 3){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[17] == 3) || (owned[2] == 3 && owned[25] == 3) || owned[17] == 3 && owned[25] == 3){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[17] == 3 || owned[25] == 3){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                else player$ -= 25;
+                     aI2$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[10] == 4){
+                if(owned[2] == 4 && owned[17] == 4 && owned[25] == 4){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[17] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[17] == 4 || owned[25] == 4){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                else player$ -= 25;
+                     aI3$ += 25;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 16){
+            pos = "St. James Place";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[11] == 0){
+                buyBox.setText("Buy For: " + prices[11]);
+                buying = true;
+                if(yes){
+                    owned[11] = 1;
+                    player$ -= prices[11];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[11] == 1){
+                endTurn2 = true;
+            }
+            if(owned[11] == 2){
+                if(houses1[11] == 0){
+                    player$ -= 14;
+                    aI1$ += 14;
+                }
+                if(houses1[11] == 1){
+                    player$ -= 70;
+                    aI1$ += 70;
+                }
+                if(houses1[11] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                if(houses1[11] == 3){
+                    player$ -= 550;
+                    aI1$ += 550;
+                }
+                if(houses1[11] == 4){
+                    player$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[11] == 5){
+                    player$ -= 950;
+                    aI1$ += 950;
+                }
+                endTurn2 = true;
+            }
+            if(owned[11] == 3){
+                if(houses2[11] == 0){
+                    player$ -= 14;
+                    aI2$ += 14;
+                }
+                if(houses2[11] == 1){
+                    player$ -= 70;
+                    aI2$ += 70;
+                }
+                if(houses2[11] == 2){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[11] == 3){
+                    player$ -= 550;
+                    aI2$ += 550;
+                }
+                if(houses2[11] == 4){
+                    player$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[11] == 5){
+                    player$ -= 950;
+                    aI2$ += 950;
+                }
+                endTurn2 = true;
+            }
+            if(owned[11] == 4){
+                if(houses3[11] == 0){
+                    player$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[11] == 1){
+                    player$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[11] == 2){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[11] == 3){
+                    player$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[11] == 4){
+                    player$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[11] == 5){
+                    player$ -= 950;
+                    aI3$ += 950;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 17){
+            var2 = 1;
+            pos = "Community Chest";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 18){
+            pos = "Tennessee Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[12] == 0){
+                buyBox.setText("Buy For: " + prices[12]);
+                buying = true;
+                if(yes){
+                    owned[12] = 1;
+                    player$ -= prices[12];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[12] == 1){
+                endTurn2 = true;
+            }
+            if(owned[12] == 2){
+                if(houses1[12] == 0){
+                    player$ -= 14;
+                    aI1$ += 14;
+                }
+                if(houses1[12] == 1){
+                    player$ -= 70;
+                    aI1$ += 70;
+                }
+                if(houses1[12] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                if(houses1[12] == 3){
+                    player$ -= 550;
+                    aI1$ += 550;
+                }
+                if(houses1[12] == 4){
+                    player$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[12] == 5){
+                    player$ -= 950;
+                    aI1$ += 950;
+                }
+                endTurn2 = true;
+            }
+            if(owned[12] == 3){
+                if(houses2[12] == 0){
+                    player$ -= 14;
+                    aI2$ += 14;
+                }
+                if(houses2[12] == 1){
+                    player$ -= 70;
+                    aI2$ += 70;
+                }
+                if(houses2[12] == 2){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[12] == 3){
+                    player$ -= 550;
+                    aI2$ += 550;
+                }
+                if(houses2[12] == 4){
+                    player$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[12] == 5){
+                    player$ -= 950;
+                    aI2$ += 950;
+                }
+                endTurn2 = true;
+            }
+            if(owned[12] == 4){
+                if(houses3[12] == 0){
+                    player$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[12] == 1){
+                    player$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[12] == 2){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[12] == 3){
+                    player$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[12] == 4){
+                    player$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[12] == 5){
+                    player$ -= 950;
+                    aI3$ += 950;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 19){
+            pos = "New York Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[13] == 0){
+                buyBox.setText("Buy For: " + prices[13]);
+                buying = true;
+                if(yes){
+                    owned[13] = 1;
+                    player$ -= prices[13];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[13] == 1){
+                endTurn2 = true;
+            }
+            if(owned[13] == 2){
+                if(houses1[13] == 0){
+                    player$ -= 16;
+                    aI1$ += 16;
+                }
+                if(houses1[13] == 1){
+                    player$ -= 80;
+                    aI1$ += 80;
+                }
+                if(houses1[13] == 2){
+                    player$ -= 220;
+                    aI1$ += 220;
+                }
+                if(houses1[13] == 3){
+                    player$ -= 600;
+                    aI1$ += 600;
+                }
+                if(houses1[13] == 4){
+                    player$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[13] == 5){
+                    player$ -= 1000;
+                    aI1$ += 1000;
+                }
+                endTurn2 = true;
+            }
+            if(owned[13] == 3){
+                if(houses2[13] == 0){
+                    player$ -= 16;
+                    aI2$ += 16;
+                }
+                if(houses2[13] == 1){
+                    player$ -= 80;
+                    aI2$ += 80;
+                }
+                if(houses2[13] == 2){
+                    player$ -= 220;
+                    aI2$ += 220;
+                }
+                if(houses2[13] == 3){
+                    player$ -= 600;
+                    aI2$ += 600;
+                }
+                if(houses2[13] == 4){
+                    player$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[13] == 5){
+                    player$ -= 1000;
+                    aI2$ += 1000;
+                }
+                endTurn2 = true;
+            }
+            if(owned[13] == 4){
+                if(houses3[13] == 0){
+                    player$ -= 16;
+                    aI3$ += 16;
+                }
+                if(houses3[13] == 1){
+                    player$ -= 80;
+                    aI3$ += 80;
+                }
+                if(houses3[13] == 2){
+                    player$ -= 220;
+                    aI3$ += 220;
+                }
+                if(houses3[13] == 3){
+                    player$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[13] == 4){
+                    player$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[13] == 5){
+                    player$ -= 1000;
+                    aI3$ += 1000;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 20){
+            player$ += freeParking;
+            freeParking = 0;
+            pos = "Free Parking";
+            playerPosBox.setText("PlayerPos: " + pos);
+            endTurn2 = true;
+        }
+        if( playerSpot%40 == 21){
+            pos = "Kentucky Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[14] == 0){
+                buyBox.setText("Buy For: " + prices[14]);
+                buying = true;
+                if(yes){
+                    owned[14] = 1;
+                    player$ -= prices[14];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[14] == 1){
+                endTurn2 = true;
+            }
+            if(owned[14] == 2){
+                if(houses1[14] == 0){
+                    player$ -= 18;
+                    aI1$ += 18;
+                }
+                if(houses1[14] == 1){
+                    player$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[14] == 2){
+                    player$ -= 250;
+                    aI1$ += 250;
+                }
+                if(houses1[14] == 3){
+                    player$ -= 700;
+                    aI1$ += 700;
+                }
+                if(houses1[14] == 4){
+                    player$ -= 875;
+                    aI1$ += 875;
+                }
+                if(houses1[14] == 5){
+                    player$ -= 1050;
+                    aI1$ += 1050;
+                }
+                endTurn2 = true;
+            }
+            if(owned[14] == 3){
+                if(houses2[14] == 0){
+                    player$ -= 18;
+                    aI2$ += 18;
+                }
+                if(houses2[14] == 1){
+                    player$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[14] == 2){
+                    player$ -= 250;
+                    aI2$ += 250;
+                }
+                if(houses2[14] == 3){
+                    player$ -= 700;
+                    aI2$ += 700;
+                }
+                if(houses2[14] == 4){
+                    player$ -= 875;
+                    aI2$ += 875;
+                }
+                if(houses2[14] == 5){
+                    player$ -= 1050;
+                    aI2$ += 1050;
+                }
+                endTurn2 = true;
+            }
+            if(owned[14] == 4){
+                if(houses3[14] == 0){
+                    player$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[14] == 1){
+                    player$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[14] == 2){
+                    player$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[14] == 3){
+                    player$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[14] == 4){
+                    player$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[14] == 5){
+                    player$ -= 1050;
+                    aI3$ += 1050;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 22){
+            var2 = 2;
+            pos = "Chance";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 23){
+            pos = "Indiana Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[15] == 0){
+                buyBox.setText("Buy For: " + prices[15]);
+                buying = true;
+                if(yes){
+                    owned[15] = 1;
+                    player$ -= prices[15];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[15] == 1){
+                endTurn2 = true;
+            }
+            if(owned[15] == 2){
+                if(houses1[15] == 0){
+                    player$ -= 18;
+                    aI1$ += 18;
+                }
+                if(houses1[15] == 1){
+                    player$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[15] == 2){
+                    player$ -= 250;
+                    aI1$ += 250;
+                }
+                if(houses1[15] == 3){
+                    player$ -= 700;
+                    aI1$ += 700;
+                }
+                if(houses1[15] == 4){
+                    player$ -= 875;
+                    aI1$ += 875;
+                }
+                if(houses1[15] == 5){
+                    player$ -= 1050;
+                    aI1$ += 1050;
+                }
+                endTurn2 = true;
+            }
+            if(owned[15] == 3){
+                if(houses2[15] == 0){
+                    player$ -= 18;
+                    aI2$ += 18;
+                }
+                if(houses2[15] == 1){
+                    player$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[15] == 2){
+                    player$ -= 250;
+                    aI2$ += 250;
+                }
+                if(houses2[15] == 3){
+                    player$ -= 700;
+                    aI2$ += 700;
+                }
+                if(houses2[15] == 4){
+                    player$ -= 875;
+                    aI2$ += 875;
+                }
+                if(houses2[15] == 5){
+                    player$ -= 1050;
+                    aI2$ += 1050;
+                }
+                endTurn2 = true;
+            }
+            if(owned[15] == 4){
+                if(houses3[15] == 0){
+                    player$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[15] == 1){
+                    player$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[15] == 2){
+                    player$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[15] == 3){
+                    player$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[15] == 4){
+                    player$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[15] == 5){
+                    player$ -= 1050;
+                    aI3$ += 1050;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 24){
+            pos = "Illinois Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[16] == 0){
+                buyBox.setText("Buy For: " + prices[16]);
+                buying = true;
+                if(yes){
+                    owned[16] = 1;
+                    player$ -= prices[16];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[16] == 1){
+                endTurn2 = true;
+            }
+            if(owned[16] == 2){
+                if(houses1[16] == 0){
+                    player$ -= 20;
+                    aI1$ += 20;
+                }
+                if(houses1[16] == 1){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                if(houses1[16] == 2){
+                    player$ -= 300;
+                    aI1$ += 300;
+                }
+                if(houses1[16] == 3){
+                    player$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[16] == 4){
+                    player$ -= 925;
+                    aI1$ += 925;
+                }
+                if(houses1[16] == 5){
+                    player$ -= 1100;
+                    aI1$ += 1100;
+                }
+                endTurn2 = true;
+            }
+            if(owned[16] == 3){
+                if(houses2[16] == 0){
+                    player$ -= 20;
+                    aI2$ += 20;
+                }
+                if(houses2[16] == 1){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                if(houses2[16] == 2){
+                    player$ -= 300;
+                    aI2$ += 300;
+                }
+                if(houses2[16] == 3){
+                    player$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[16] == 4){
+                    player$ -= 925;
+                    aI2$ += 925;
+                }
+                if(houses2[16] == 5){
+                    player$ -= 1100;
+                    aI2$ += 1100;
+                }
+                endTurn2 = true;
+            }
+            if(owned[16] == 4){
+                if(houses2[16] == 0){
+                    player$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses2[16] == 1){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses2[16] == 2){
+                    player$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses2[16] == 3){
+                    player$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses2[16] == 4){
+                    player$ -= 925;
+                    aI3$ += 925;
+                }
+                if(houses2[16] == 5){
+                    player$ -= 1100;
+                    aI3$ += 1100;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 25){
+            pos = "B.& O. Railroad";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[17] == 0){
+                buyBox.setText("Buy For: " + prices[17]);
+                buying = true;
+                if(yes){
+                    owned[17] = 1;
+                    player$ -= prices[17];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[17] == 1){
+                endTurn2 = true;
+            }
+            if(owned[17] == 2){
+                if(owned[2] == 2 && owned[10] == 2 && owned[25] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[10] == 2) || (owned[2] == 2 && owned[25] == 2) || owned[10] == 2 && owned[25] == 2){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[10] == 2 || owned[25] == 2){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                else player$ -= 25;
+                     aI1$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[17] == 3){
+                if(owned[2] == 3 && owned[10] == 3 && owned[25] == 3){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[10] == 3) || (owned[2] == 3 && owned[25] == 3) || owned[10] == 3 && owned[25] == 3){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[10] == 3 || owned[25] == 3){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                else player$ -= 25;
+                     aI2$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[17] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[25] == 4){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[10] == 4 && owned[25] == 4){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[25] == 4){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                else player$ -= 25;
+                     aI3$ += 25;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 26){
+            pos = "Atlantic Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[18] == 0){
+                buyBox.setText("Buy For: " + prices[18]);
+                buying = true;
+                if(yes){
+                    owned[18] = 1;
+                    player$ -= prices[18];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[18] == 1){
+                endTurn2 = true;
+            }
+            if(owned[18] == 2){
+                if(houses1[18] == 0){
+                    player$ -= 22;
+                    aI1$ += 22;
+                }
+                if(houses1[18] == 1){
+                    player$ -= 110;
+                    aI1$ += 110;
+                }
+                if(houses1[18] == 2){
+                    player$ -= 330;
+                    aI1$ += 330;
+                }
+                if(houses1[18] == 3){
+                    player$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[18] == 4){
+                    player$ -= 975;
+                    aI1$ += 975;
+                }
+                if(houses1[18] == 5){
+                    player$ -= 1150;
+                    aI1$ += 1150;
+                }
+                endTurn2 = true;
+            }
+            if(owned[18] == 3){
+                if(houses2[18] == 0){
+                    player$ -= 22;
+                    aI2$ += 22;
+                }
+                if(houses2[18] == 1){
+                    player$ -= 110;
+                    aI2$ += 110;
+                }
+                if(houses2[18] == 2){
+                    player$ -= 330;
+                    aI2$ += 330;
+                }
+                if(houses2[18] == 3){
+                    player$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[18] == 4){
+                    player$ -= 975;
+                    aI2$ += 975;
+                }
+                if(houses2[18] == 5){
+                    player$ -= 1150;
+                    aI2$ += 1150;
+                }
+                endTurn2 = true;
+            }
+            if(owned[18] == 4){
+                if(houses3[18] == 0){
+                    player$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[18] == 1){
+                    player$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[18] == 2){
+                    player$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[18] == 3){
+                    player$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[18] == 4){
+                    player$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[18] == 5){
+                    player$ -= 1150;
+                    aI3$ += 1150;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 27){
+            pos = "Ventnor Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[19] == 0){
+                buyBox.setText("Buy For: " + prices[19]);
+                buying = true;
+                if(yes){
+                    owned[19] = 1;
+                    player$ -= prices[19];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[19] == 1){
+                endTurn2 = true;
+            }
+            if(owned[19] == 2){
+                if(houses1[19] == 0){
+                    player$ -= 22;
+                    aI1$ += 22;
+                }
+                if(houses1[19] == 1){
+                    player$ -= 110;
+                    aI1$ += 110;
+                }
+                if(houses1[19] == 2){
+                    player$ -= 330;
+                    aI1$ += 330;
+                }
+                if(houses1[19] == 3){
+                    player$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[19] == 4){
+                    player$ -= 975;
+                    aI1$ += 975;
+                }
+                if(houses1[19] == 5){
+                    player$ -= 1150;
+                    aI1$ += 1150;
+                }
+                endTurn2 = true;
+            }
+            if(owned[19] == 3){
+                if(houses2[19] == 0){
+                    player$ -= 22;
+                    aI2$ += 22;
+                }
+                if(houses2[19] == 1){
+                    player$ -= 110;
+                    aI2$ += 110;
+                }
+                if(houses2[19] == 2){
+                    player$ -= 330;
+                    aI2$ += 330;
+                }
+                if(houses2[19] == 3){
+                    player$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[19] == 4){
+                    player$ -= 975;
+                    aI2$ += 975;
+                }
+                if(houses2[19] == 5){
+                    player$ -= 1150;
+                    aI2$ += 1150;
+                }
+                endTurn2 = true;
+            }
+            if(owned[19] == 4){
+                if(houses3[19] == 0){
+                    player$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[19] == 1){
+                    player$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[19] == 2){
+                    player$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[19] == 3){
+                    player$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[19] == 4){
+                    player$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[19] == 5){
+                    player$ -= 1150;
+                    aI3$ += 1150;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 28){
+            pos = "Water Works";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[20] == 0){
+                buyBox.setText("Buy For: " + prices[20]);
+                buying = true;
+                if(yes){
+                    owned[20] = 1;
+                    player$ -= prices[20];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[20] == 1){
+                endTurn2 = true;
+            }
+            if(owned[20] == 2){
+                if(owned[7] == 2){
+                    player$ -= roll * 10;
+                    aI1$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI1$ += roll * 4;
+                endTurn2 = true;
+            }
+            if(owned[20] == 3){
+                if(owned[7] == 3){
+                    player$ -= roll * 10;
+                    aI2$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI2$ += roll * 4;
+                endTurn2 = true;
+            }
+            if(owned[20] == 4){
+                if(owned[7] == 4){
+                    player$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else player$ -= roll * 4;
+                     aI3$ += roll * 4;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 29){
+            pos = "Marvin Gardens";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[21] == 0){
+                buyBox.setText("Buy For: " + prices[21]);
+                buying = true;
+                if(yes){
+                    owned[21] = 1;
+                    player$ -= prices[21];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[21] == 1){
+                endTurn2 = true;
+            }
+            if(owned[21] == 2){
+                if(houses1[21] == 0){
+                    player$ -= 24;
+                    aI1$ += 24;
+                }
+                if(houses1[21] == 1){
+                    player$ -= 120;
+                    aI1$ += 120;
+                }
+                if(houses1[21] == 2){
+                    player$ -= 360;
+                    aI1$ += 360;
+                }
+                if(houses1[21] == 3){
+                    player$ -= 850;
+                    aI1$ += 850;
+                }
+                if(houses1[21] == 4){
+                    player$ -= 1025;
+                    aI1$ += 1025;
+                }
+                if(houses1[21] == 5){
+                    player$ -= 1200;
+                    aI1$ += 1200;
+                }
+                endTurn2 = true;
+            }
+            if(owned[21] == 3){
+                if(houses2[21] == 0){
+                    player$ -= 24;
+                    aI2$ += 24;
+                }
+                if(houses2[21] == 1){
+                    player$ -= 120;
+                    aI2$ += 120;
+                }
+                if(houses2[21] == 2){
+                    player$ -= 360;
+                    aI2$ += 360;
+                }
+                if(houses2[21] == 3){
+                    player$ -= 850;
+                    aI2$ += 850;
+                }
+                if(houses2[21] == 4){
+                    player$ -= 1025;
+                    aI2$ += 1025;
+                }
+                if(houses2[21] == 5){
+                    player$ -= 1200;
+                    aI2$ += 1200;
+                }
+                endTurn2 = true;
+            }
+            if(owned[21] == 4){
+                if(houses3[21] == 0){
+                    player$ -= 24;
+                    aI3$ += 24;
+                }
+                if(houses3[21] == 1){
+                    player$ -= 120;
+                    aI3$ += 120;
+                }
+                if(houses3[21] == 2){
+                    player$ -= 360;
+                    aI3$ += 360;
+                }
+                if(houses3[21] == 3){
+                    player$ -= 850;
+                    aI3$ += 850;
+                }
+                if(houses3[21] == 4){
+                    player$ -= 1025;
+                    aI3$ += 1025;
+                }
+                if(houses3[21] == 5){
+                    player$ -= 1200;
+                    aI3$ += 1200;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 30){
+            inJail = true;
+            playerSpot -= 20;
+            pos = "Jail";
+            playerPosBox.setText("PlayerPos: " + pos);
+            endTurn2 = true;
+        }
+        if( playerSpot%40 == 31){
+            pos = "Pacific Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[22] == 0){
+                buyBox.setText("Buy For: " + prices[22]);
+                buying = true;
+                if(yes){
+                    owned[22] = 1;
+                    player$ -= prices[22];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[22] == 1){
+                endTurn2 = true;
+            }
+            if(owned[22] == 2){
+                if(houses1[22] == 0){
+                    player$ -= 26;
+                    aI1$ += 26;
+                }
+                if(houses1[22] == 1){
+                    player$ -= 130;
+                    aI1$ += 130;
+                }
+                if(houses1[22] == 2){
+                    player$ -= 390;
+                    aI1$ += 390;
+                }
+                if(houses1[22] == 3){
+                    player$ -= 900;
+                    aI1$ += 900;
+                }
+                if(houses1[22] == 4){
+                    player$ -= 1100;
+                    aI1$ += 1100;
+                }
+                if(houses1[22] == 5){
+                    player$ -= 1275;
+                    aI1$ += 1275;
+                }
+                endTurn2 = true;
+            }
+            if(owned[22] == 3){
+                if(houses2[22] == 0){
+                    player$ -= 26;
+                    aI2$ += 26;
+                }
+                if(houses2[22] == 1){
+                    player$ -= 130;
+                    aI2$ += 130;
+                }
+                if(houses2[22] == 2){
+                    player$ -= 390;
+                    aI2$ += 390;
+                }
+                if(houses2[22] == 3){
+                    player$ -= 900;
+                    aI2$ += 900;
+                }
+                if(houses2[22] == 4){
+                    player$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[22] == 5){
+                    player$ -= 1275;
+                    aI2$ += 1275;
+                }
+                endTurn2 = true;
+            }
+            if(owned[22] == 4){
+                if(houses3[22] == 0){
+                    player$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[22] == 1){
+                    player$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[22] == 2){
+                    player$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[22] == 3){
+                    player$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[22] == 4){
+                    player$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[22] == 5){
+                    player$ -= 1275;
+                    aI3$ += 1275;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 32){
+            pos = "North Carolina Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[23] == 0){
+                buyBox.setText("Buy For: " + prices[23]);
+                buying = true;
+                if(yes){
+                    owned[23] = 1;
+                    player$ -= prices[23];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[23] == 1){
+                endTurn2 = true;
+            }
+            if(owned[23] == 2){
+                if(houses1[23] == 0){
+                    player$ -= 26;
+                    aI1$ += 26;
+                }
+                if(houses1[23] == 1){
+                    player$ -= 130;
+                    aI1$ += 130;
+                }
+                if(houses1[23] == 2){
+                    player$ -= 390;
+                    aI1$ += 390;
+                }
+                if(houses1[23] == 3){
+                    player$ -= 900;
+                    aI1$ += 900;
+                }
+                if(houses1[23] == 4){
+                    player$ -= 1100;
+                    aI1$ += 1100;
+                }
+                if(houses1[23] == 5){
+                    player$ -= 1275;
+                    aI1$ += 1275;
+                }
+                endTurn2 = true;
+            }
+            if(owned[23] == 3){
+                if(houses2[23] == 0){
+                    player$ -= 26;
+                    aI2$ += 26;
+                }
+                if(houses2[23] == 1){
+                    player$ -= 130;
+                    aI2$ += 130;
+                }
+                if(houses2[23] == 2){
+                    player$ -= 390;
+                    aI2$ += 390;
+                }
+                if(houses2[23] == 3){
+                    player$ -= 900;
+                    aI2$ += 900;
+                }
+                if(houses2[23] == 4){
+                    player$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[23] == 5){
+                    player$ -= 1275;
+                    aI2$ += 1275;
+                }
+                endTurn2 = true;
+            }
+            if(owned[23] == 4){
+                if(houses3[23] == 0){
+                    player$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[23] == 1){
+                    player$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[23] == 2){
+                    player$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[23] == 3){
+                    player$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[23] == 4){
+                    player$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[23] == 5){
+                    player$ -= 1275;
+                    aI3$ += 1275;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 33){
+            var2 = 1;
+            pos = "Community Chest";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 34){
+            pos = "Pennsylvania Avenue";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[24] == 0){
+                buyBox.setText("Buy For: " + prices[24]);
+                buying = true;
+                if(yes){
+                    owned[24] = 1;
+                    player$ -= prices[24];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[24] == 1){
+                endTurn2 = true;
+            }
+            if(owned[24] == 2){
+                if(houses1[24] == 0){
+                    player$ -= 28;
+                    aI1$ += 28;
+                }
+                if(houses1[24] == 1){
+                    player$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[24] == 2){
+                    player$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[24] == 3){
+                    player$ -= 1000;
+                    aI1$ += 1000;
+                }
+                if(houses1[24] == 4){
+                    player$ -= 1200;
+                    aI1$ += 1200;
+                }
+                if(houses1[24] == 5){
+                    player$ -= 1400;
+                    aI1$ += 1400;
+                }
+                endTurn2 = true;
+            }
+            if(owned[24] == 3){
+                if(houses2[24] == 0){
+                    player$ -= 28;
+                    aI2$ += 28;
+                }
+                if(houses2[24] == 1){
+                    player$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[24] == 2){
+                    player$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[24] == 3){
+                    player$ -= 1000;
+                    aI2$ += 1000;
+                }
+                if(houses2[24] == 4){
+                    player$ -= 1200;
+                    aI2$ += 1200;
+                }
+                if(houses2[24] == 5){
+                    player$ -= 1400;
+                    aI2$ += 1400;
+                }
+                endTurn2 = true;
+            }
+            if(owned[24] == 4){
+                if(houses3[24] == 0){
+                    player$ -= 28;
+                    aI3$ += 28;
+                }
+                if(houses3[24] == 1){
+                    player$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[24] == 2){
+                    player$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[24] == 3){
+                    player$ -= 1000;
+                    aI3$ += 1000;
+                }
+                if(houses3[24] == 4){
+                    player$ -= 1200;
+                    aI3$ += 1200;
+                }
+                if(houses3[24] == 5){
+                    player$ -= 1400;
+                    aI3$ += 1400;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 35){
+            pos = "Short Line Railroad";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[25] == 0){
+                buyBox.setText("Buy For: " + prices[25]);
+                buying = true;
+                if(yes){
+                    owned[25] = 1;
+                    player$ -= prices[25];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[25] == 1){
+                endTurn2 = true;
+            }
+            if(owned[25] == 2){
+                if(owned[2] == 2 && owned[10] == 2 && owned[17] == 2){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[10] == 2) || (owned[2] == 2 && owned[17] == 2) || owned[10] == 2 && owned[17] == 2){
+                    player$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[10] == 2 || owned[17] == 2){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                else player$ -= 25;
+                     aI1$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[25] == 3){
+                if(owned[2] == 3 && owned[10] == 3 && owned[17] == 3){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[10] == 3) || (owned[2] == 3 && owned[17] == 3) || owned[10] == 3 && owned[17] == 3){
+                    player$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[10] == 3 || owned[17] == 3){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                else player$ -= 25;
+                     aI2$ += 25;
+                endTurn2 = true;
+            }
+            if(owned[25] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[17] == 4){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[17] == 4) || owned[10] == 4 && owned[17] == 4){
+                    player$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[17] == 4){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                else player$ -= 25;
+                     aI3$ += 25;
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 36){
+            var2 = 2;
+            pos = "Chance";
+            playerPosBox.setText("PlayerPos: " + pos);
+        }
+        if( playerSpot%40 == 37){
+            pos = "Park Place";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[26] == 0){
+                buyBox.setText("Buy For: " + prices[26]);
+                buying = true;
+                if(yes){
+                    owned[26] = 1;
+                    player$ -= prices[26];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[26] == 1){
+                endTurn2 = true;
+            }
+            if(owned[26] == 2){
+                if(houses1[26] == 0){
+                    player$ -= 35;
+                    aI1$ += 35;
+                }
+                if(houses1[26] == 1){
+                    player$ -= 175;
+                    aI1$ += 175;
+                }
+                if(houses1[26] == 2){
+                    player$ -= 500;
+                    aI1$ += 500;
+                }
+                if(houses1[26] == 3){
+                    player$ -= 1100;
+                    aI1$ += 1100;
+                }
+                if(houses1[26] == 4){
+                    player$ -= 1300;
+                    aI1$ += 1300;
+                }
+                if(houses1[26] == 5){
+                    player$ -= 1500;
+                    aI1$ += 1500;
+                }
+                endTurn2 = true;
+            }
+            if(owned[26] == 3){
+                if(houses2[26] == 0){
+                    player$ -= 35;
+                    aI2$ += 35;
+                }
+                if(houses2[26] == 1){
+                    player$ -= 175;
+                    aI2$ += 175;
+                }
+                if(houses2[26] == 2){
+                    player$ -= 500;
+                    aI2$ += 500;
+                }
+                if(houses2[26] == 3){
+                    player$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[26] == 4){
+                    player$ -= 1300;
+                    aI2$ += 1300;
+                }
+                if(houses2[26] == 5){
+                    player$ -= 1500;
+                    aI2$ += 1500;
+                }
+                endTurn2 = true;
+            }
+            if(owned[26] == 4){
+                if(houses3[26] == 0){
+                    player$ -= 35;
+                    aI3$ += 35;
+                }
+                if(houses3[26] == 1){
+                    player$ -= 175;
+                    aI3$ += 175;
+                }
+                if(houses3[26] == 2){
+                    player$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[26] == 3){
+                    player$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[26] == 4){
+                    player$ -= 1300;
+                    aI3$ += 1300;
+                }
+                if(houses3[26] == 5){
+                    player$ -= 1500;
+                    aI3$ += 1500;
+                }
+                endTurn2 = true;
+            }
+        }
+        if( playerSpot%40 == 38){
+            player$ -= 100;
+            freeParking += 100;
+            pos = "Luxury Tax";
+            playerPosBox.setText("PlayerPos: " + pos);
+            endTurn2 = true;
+        }
+        if( playerSpot%40 == 39){
+            pos = "Boardwalk";
+            playerPosBox.setText("PlayerPos: " + pos);
+            if(owned[27] == 0){
+                buyBox.setText("Buy For: " + prices[27]);
+                buying = true;
+                if(yes){
+                    owned[27] = 1;
+                    player$ -= prices[27];
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    yes = false;
+                }
+                if(no){
+                    buyBox.setText("Buy For: 0");
+                    buying = false;
+                    no = false;
+                }
+            }
+            if(owned[27] == 1){
+                endTurn2 = true;
+            }
+            if(owned[27] == 2){
+                if(houses1[27] == 0){
+                    player$ -= 50;
+                    aI1$ += 50;
+                }
+                if(houses1[27] == 1){
+                    player$ -= 200;
+                    aI1$ += 200;
+                }
+                if(houses1[27] == 2){
+                    player$ -= 600;
+                    aI1$ += 600;
+                }
+                if(houses1[27] == 3){
+                    player$ -= 1400;
+                    aI1$ += 1400;
+                }
+                if(houses1[27] == 4){
+                    player$ -= 1700;
+                    aI1$ += 1700;
+                }
+                if(houses1[27] == 5){
+                    player$ -= 2000;
+                    aI1$ += 2000;
+                }
+                endTurn2 = true;
+            }
+            if(owned[27] == 3){
+                if(houses2[27] == 0){
+                    player$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[27] == 1){
+                    player$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[27] == 2){
+                    player$ -= 600;
+                    aI2$ += 600;
+                }
+                if(houses2[27] == 3){
+                    player$ -= 1400;
+                    aI2$ += 1400;
+                }
+                if(houses2[27] == 4){
+                    player$ -= 1700;
+                    aI2$ += 1700;
+                }
+                if(houses2[27] == 5){
+                    player$ -= 2000;
+                    aI2$ += 2000;
+                }
+                endTurn2 = true;
+            }
+            if(owned[27] == 4){
+                if(houses3[27] == 0){
+                    player$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[27] == 1){
+                    player$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[27] == 2){
+                    player$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[27] == 3){
+                    player$ -= 1400;
+                    aI3$ += 1400;
+                }
+                if(houses3[27] == 4){
+                    player$ -= 1700;
+                    aI3$ += 1700;
+                }
+                if(houses3[27] == 5){
+                    player$ -= 2000;
+                    aI3$ += 2000;
+                }
+                endTurn2 = true;
+            }
+        }
+        pM();
+        playerBox.setText("Player: $" + player$);
+        aIBox1.setText("A.I. 1: $" + aI1$);
+        aIBox2.setText("A.I. 2: $" + aI2$);
+        aIBox3.setText("A.I. 3: $" + aI3$);
+        System.out.println("Player Spot:" + playerSpot);
+    }     
+    public void aI1Turn(){
+        if(inJail1 == false){
+            roll = (int) (Math.random() * 11) + 2;
+            aI1Spot += roll;
+        }
+        if( aI1Spot%40 == 0 || aI1Spot > 40 * var01){
+            aI1$ += 200;
+            var01++;
+        }
+        if( aI1Spot%40 == 0){
+            pos1 = "Go!";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 1){
+            pos1 = "Mediterranean Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[0] == 0){
+                if( aI1$ >= prices[0]){
+                    owned[0] = 2;
+                    aI1$ -= prices[0];
+                }
+            }
+            if(owned[0] == 1){
+                if(houses[0] == 0){
+                    aI1$ -= 2;
+                    player$ += 2;
+                }
+                if(houses[0] == 1){
+                    aI1$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[0] == 2){
+                    aI1$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[0] == 3){
+                    aI1$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[0] == 4){
+                    aI1$ -= 160;
+                    player$ += 160;
+                }
+                if(houses[0] == 5){
+                    aI1$ -= 250;
+                    player$ += 250;
+                }
+            }
+            if(owned[0] == 3){
+                if(houses2[0] == 0){
+                    aI1$ -= 2;
+                    aI2$ += 2;
+                }
+                if(houses2[0] == 1){
+                    aI1$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[0] == 2){
+                    aI1$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[0] == 3){
+                    aI1$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[0] == 4){
+                    aI1$ -= 160;
+                    aI2$ += 160;
+                }
+                if(houses2[0] == 5){
+                    aI1$ -= 250;
+                    aI2$ += 250;
+                }
+            }
+            if(owned[0] == 4){
+                if(houses3[0] == 0){
+                    aI1$ -= 2;
+                    aI3$ += 2;
+                }
+                if(houses3[0] == 1){
+                    aI1$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[0] == 2){
+                    aI1$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[0] == 3){
+                    aI1$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[0] == 4){
+                    aI1$ -= 160;
+                    aI3$ += 160;
+                }
+                if(houses3[0] == 5){
+                    aI1$ -= 250;
+                    aI3$ += 250;
+                }
+            }
+        }
+        if( aI1Spot%40 == 2){
+            pos1 = "Community Chest";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            communityChest();
+        }
+        if( aI1Spot%40 == 3){
+            pos1 = "Baltic Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[1] == 0){
+                if( aI1$ >= prices[1]){
+                    owned[1] = 2;
+                    aI1$ -= prices[1];
+                }
+            }
+            if(owned[1] == 1){
+                if(houses[1] == 0){
+                    aI1$ -= 4;
+                    player$ += 4;
+                }
+                if(houses[1] == 1){
+                    aI1$ -= 20;
+                    player$ += 20;
+                }
+                if(houses[1] == 2){
+                    aI1$ -= 60;
+                    player$ += 60;
+                }
+                if(houses[1] == 3){
+                    aI1$ -= 180;
+                    player$ += 180;
+                }
+                if(houses[1] == 4){
+                    aI1$ -= 320;
+                    player$ += 320;
+                }
+                if(houses[1] == 5){
+                    aI1$ -= 450;
+                    player$ += 450;
+                }
+            }
+            if(owned[1] == 3){
+                if(houses2[1] == 0){
+                    aI1$ -= 4;
+                    aI2$ += 4;
+                }
+                if(houses2[1] == 1){
+                    aI1$ -= 20;
+                    aI2$ += 20;
+                }
+                if(houses2[1] == 2){
+                    aI1$ -= 60;
+                    aI2$ += 60;
+                }
+                if(houses2[1] == 3){
+                    aI1$ -= 180;
+                    aI2$ += 180;
+                }
+                if(houses2[1] == 4){
+                    aI1$ -= 320;
+                    aI2$ += 320;
+                }
+                if(houses2[1] == 5){
+                    aI1$ -= 450;
+                    aI2$ += 450;
+                }
+            }
+            if(owned[1] == 4){
+                if(houses3[1] == 0){
+                    aI1$ -= 4;
+                    aI3$ += 4;
+                }
+                if(houses3[1] == 1){
+                    aI1$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses3[1] == 2){
+                    aI1$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[1] == 3){
+                    aI1$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[1] == 4){
+                    aI1$ -= 320;
+                    aI3$ += 320;
+                }
+                if(houses3[1] == 5){
+                    aI1$ -= 450;
+                    aI3$ += 450;
+                }
+            }
+        }
+        if( aI1Spot%40 == 4){
+            aI1$ -= 200;
+            freeParking += 200;
+            pos1 = "Income Tax";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 5){
+            pos1 = "Reading Railroad";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[2] == 0){
+                if(aI1$ >= prices[2]){
+                    owned[2] = 2;
+                    aI1$ -= prices[2];
+                }
+            }
+            if(owned[2] == 1){
+                if(owned[10] == 1 && owned[17] == 1 && owned[25] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[10] == 1 && owned[17] == 1) || (owned[10] == 1 && owned[25] == 1) || owned[17] == 1 && owned[25] == 1){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[10] == 1 || owned[17] == 1 || owned[25] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                else aI1$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[2] == 3){
+                if(owned[10] == 3 && owned[17] == 3 && owned[25] == 3){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[10] == 3 && owned[17] == 3) || (owned[10] == 3 && owned[25] == 3) || owned[17] == 3 && owned[25] == 3){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[10] == 3 || owned[17] == 3 || owned[25] == 3){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI2$ += 25;
+            }
+            if(owned[2] == 4){
+                if(owned[10] == 4 && owned[17] == 4 && owned[25] == 4){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[10] == 4 && owned[17] == 4) || (owned[10] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[10] == 4 || owned[17] == 4 || owned[25] == 4){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI1Spot%40 == 6){
+            pos1 = "Oriental Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[3] == 0){
+                if( aI1$ >= prices[3]){
+                    owned[3] = 2;
+                    aI1$ -= prices[3];
+                    if(houses1[3] < 5){
+                        aIFormatted1 = String.format(pos1 + " - " + houses1[3] + " House(s)");
+                    }
+                    if(houses1[3] == 5){
+                        aIFormatted1 = String.format(pos1 + " - 1" + " Hotel");
+                    }
+                    aIMessage1 += "\n"+aIFormatted1;
+                    aIPropBox1.setText(aIMessage1);
+                }
+            }
+            if(owned[3] == 1){
+                if(houses[3] == 0){
+                    aI1$ -= 6;
+                    player$ += 6;
+                }
+                if(houses[3] == 1){
+                    aI1$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[3] == 2){
+                    aI1$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[3] == 3){
+                    aI1$ -= 270;
+                    player$ += 270;
+                }
+                if(houses[3] == 4){
+                    aI1$ -= 400;
+                    player$ += 400;
+                }
+                if(houses[3] == 5){
+                    aI1$ -= 550;
+                    player$ += 550;
+                }
+            }
+            if(owned[3] == 3){
+                if(houses2[3] == 0){
+                    aI1$ -= 6;
+                    aI2$ += 6;
+                }
+                if(houses2[3] == 1){
+                    aI1$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[3] == 2){
+                    aI1$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[3] == 3){
+                    aI1$ -= 270;
+                    aI2$ += 270;
+                }
+                if(houses2[3] == 4){
+                    aI1$ -= 400;
+                    aI2$ += 400;
+                }
+                if(houses2[3] == 5){
+                    aI1$ -= 550;
+                    aI2$ += 550;
+                }
+            }
+            if(owned[3] == 4){
+                if(houses3[3] == 0){
+                    aI1$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[3] == 1){
+                    aI1$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[3] == 2){
+                    aI1$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[3] == 3){
+                    aI1$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[3] == 4){
+                    aI1$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[3] == 5){
+                    aI1$ -= 550;
+                    aI3$ += 550;
+                }
+            }
+        }
+        if( aI1Spot%40 == 7){
+            pos1 = "Chance";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            chance();
+        }
+        if(aI1Spot%40 == 8){
+            pos1 = "Vermont Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[4] == 0){
+                if( aI1$ >= prices[4]){
+                    owned[4] = 2;
+                    aI1$ -= prices[4];
+                }
+            }
+            if(owned[4] == 1){
+                if(houses[4] == 0){
+                    aI1$ -= 6;
+                    player$ += 6;
+                }
+                if(houses[4] == 1){
+                    aI1$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[4] == 2){
+                    aI1$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[4] == 3){
+                    aI1$ -= 270;
+                    player$ += 270;
+                }
+                if(houses[4] == 4){
+                    aI1$ -= 400;
+                    player$ += 400;
+                }
+                if(houses[4] == 5){
+                    aI1$ -= 550;
+                    player$ += 550;
+                }
+            }
+            if(owned[4] == 3){
+                if(houses2[4] == 0){
+                    aI1$ -= 6;
+                    aI2$ += 6;
+                }
+                if(houses2[4] == 1){
+                    aI1$ -= 30;
+                    aI2$ += 30;
+                }
+                if(houses2[4] == 2){
+                    aI1$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[4] == 3){
+                    aI1$ -= 270;
+                    aI2$ += 270;
+                }
+                if(houses2[4] == 4){
+                    aI1$ -= 400;
+                    aI2$ += 400;
+                }
+                if(houses2[4] == 5){
+                    aI1$ -= 550;
+                    aI2$ += 550;
+                }
+            }
+            if(owned[4] == 4){
+                if(houses3[4] == 0){
+                    aI1$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[4] == 1){
+                    aI1$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[4] == 2){
+                    aI1$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[4] == 3){
+                    aI1$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[4] == 4){
+                    aI1$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[4] == 5){
+                    aI1$ -= 550;
+                    aI3$ += 550;
+                }
+            }
+        }
+        if( aI1Spot%40 == 9){
+            pos1 = "Connecticut Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[5] == 0){
+                if( aI1$ >= prices[5]){
+                    owned[5] = 2;
+                    aI1$ -= prices[5];
+                }
+            }
+            if(owned[5] == 1){
+                if(houses[5] == 0){
+                    aI1$ -= 8;
+                    player$ += 8;
+                }
+                if(houses[5] == 1){
+                    aI1$ -= 40;
+                    player$ += 40;
+                }
+                if(houses[5] == 2){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                if(houses[5] == 3){
+                    aI1$ -= 300;
+                    player$ += 300;
+                }
+                if(houses[5] == 4){
+                    aI1$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[5] == 5){
+                    aI1$ -= 600;
+                    player$ += 600;
+                }
+            }
+            if(owned[5] == 3){
+                if(houses2[5] == 0){
+                    aI1$ -= 8;
+                    aI2$ += 8;
+                }
+                if(houses2[5] == 1){
+                    aI1$ -= 40;
+                    aI2$ += 40;
+                }
+                if(houses2[5] == 2){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                if(houses2[5] == 3){
+                    aI1$ -= 300;
+                    aI2$ += 300;
+                }
+                if(houses2[5] == 4){
+                    aI1$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[5] == 5){
+                    aI1$ -= 600;
+                    aI2$ += 600;
+                }
+            }
+            if(owned[5] == 4){
+                if(houses3[5] == 0){
+                    aI1$ -= 8;
+                    aI3$ += 8;
+                }
+                if(houses3[5] == 1){
+                    aI1$ -= 40;
+                    aI3$ += 40;
+                }
+                if(houses3[5] == 2){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses3[5] == 3){
+                    aI1$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses3[5] == 4){
+                    aI1$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[5] == 5){
+                    aI1$ -= 600;
+                    aI3$ += 600;
+                }
+            }
+        }
+        if( aI1Spot%40 == 10){
+            pos1 = "Just Visiting";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(inJail1){
+                pos1 = "Jail";
+                aIPosBox1.setText("A.I.Pos 1: " + pos1);
+                for(int i = 0; i < 3; i++){
+                    if((int) (Math.random() * 6) == (int) (Math.random() * 6)){
+                        inJail1 = false;
+                    }
+                }
+            }
+            if(inJail1 == false){
+                pos1 = "Just Visiting";
+                aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            }
+        }
+        if( aI1Spot%40 == 11){
+            pos1 = "St. Charles Place";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[6] == 0){
+                if( aI1$ >= prices[6]){
+                    owned[6] = 2;
+                    aI1$ -= prices[6];
+                }
+            }
+            if(owned[6] == 1){
+                if(houses[6] == 0){
+                    aI1$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[6] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[6] == 2){
+                    aI1$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[6] == 3){
+                    aI1$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[6] == 4){
+                    aI1$ -= 625;
+                    player$ += 625;
+                }
+                if(houses[6] == 5){
+                    aI1$ -= 750;
+                    player$ += 750;
+                }
+            }
+            if(owned[6] == 3){
+                if(houses2[6] == 0){
+                    aI1$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[6] == 1){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[6] == 2){
+                    aI1$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[6] == 3){
+                    aI1$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[6] == 4){
+                    aI1$ -= 625;
+                    aI2$ += 625;
+                }
+                if(houses2[6] == 5){
+                    aI1$ -= 750;
+                    aI2$ += 750;
+                }
+            }
+            if(owned[6] == 4){
+                if(houses3[6] == 0){
+                    aI1$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[6] == 1){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[6] == 2){
+                    aI1$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[6] == 3){
+                    aI1$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[6] == 4){
+                    aI1$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[6] == 5){
+                    aI1$ -= 750;
+                    aI3$ += 750;
+                }
+            }
+        }
+        if( aI1Spot%40 == 12){
+            pos1 = "Electric Company";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[7] == 0){
+                if(aI1$ >= prices[7]){
+                    owned[7] = 2;
+                    aI1$ -= prices[7];
+                }
+            }
+            if(owned[7] == 1){
+                if(owned[20] == 1){
+                    aI1$ -= roll * 10;
+                    player$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     player$ += roll * 4;
+            }
+            if(owned[7] == 3){
+                if(owned[20] == 3){
+                    aI1$ -= roll * 10;
+                    aI2$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     aI2$ += roll * 4;
+            }
+            if(owned[7] == 4){
+                if(owned[20] == 4){
+                    aI1$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     aI3$ += roll * 4;
+            }
+        }
+        if( aI1Spot%40 == 13){
+            pos1 = "States Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[8] == 0){
+                if( aI1$ >= prices[8]){
+                    owned[8] = 2;
+                    aI1$ -= prices[8];
+                }
+            }
+            if(owned[8] == 1){
+                if(houses[8] == 0){
+                    aI1$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[8] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[8] == 2){
+                    aI1$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[8] == 3){
+                    aI1$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[8] == 4){
+                    aI1$ -= 625;
+                    player$ += 625;
+                }
+                if(houses[8] == 5){
+                    aI1$ -= 750;
+                    player$ += 750;
+                }
+            }
+            if(owned[8] == 3){
+                if(houses2[8] == 0){
+                    aI1$ -= 10;
+                    aI2$ += 10;
+                }
+                if(houses2[8] == 1){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[8] == 2){
+                    aI1$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[8] == 3){
+                    aI1$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[8] == 4){
+                    aI1$ -= 625;
+                    aI2$ += 625;
+                }
+                if(houses2[8] == 5){
+                    aI1$ -= 750;
+                    aI2$ += 750;
+                }
+            }
+            if(owned[8] == 4){
+                if(houses3[8] == 0){
+                    aI1$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[8] == 1){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[8] == 2){
+                    aI1$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[8] == 3){
+                    aI1$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[8] == 4){
+                    aI1$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[8] == 5){
+                    aI1$ -= 750;
+                    aI3$ += 750;
+                }
+            }
+        }
+        if( aI1Spot%40 == 14){
+            pos1 = "Virgina Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[9] == 0){
+                if( aI1$ >= prices[9]){
+                    owned[9] = 2;
+                    aI1$ -= prices[9];
+                }
+            }
+            if(owned[9] == 1){
+                if(houses[9] == 0){
+                    aI1$ -= 12;
+                    player$ += 12;
+                }
+                if(houses[9] == 1){
+                    aI1$ -= 60;
+                    player$ += 60;
+                }
+                if(houses[9] == 2){
+                    aI1$ -= 180;
+                    player$ += 180;
+                }
+                if(houses[9] == 3){
+                    aI1$ -= 500;
+                    player$ += 500;
+                }
+                if(houses[9] == 4){
+                    aI1$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[9] == 5){
+                    aI1$ -= 900;
+                    player$ += 900;
+                }
+            }
+            if(owned[9] == 3){
+                if(houses2[9] == 0){
+                    aI1$ -= 12;
+                    aI2$ += 12;
+                }
+                if(houses2[9] == 1){
+                    aI1$ -= 60;
+                    aI2$ += 60;
+                }
+                if(houses2[9] == 2){
+                    aI1$ -= 180;
+                    aI2$ += 180;
+                }
+                if(houses2[9] == 3){
+                    aI1$ -= 500;
+                    aI2$ += 500;
+                }
+                if(houses2[9] == 4){
+                    aI1$ -= 700;
+                    aI2$ += 700;
+                }
+                if(houses2[9] == 5){
+                    aI1$ -= 900;
+                    aI2$ += 900;
+                }
+            }
+            if(owned[9] == 4){
+                if(houses3[9] == 0){
+                    aI1$ -= 12;
+                    aI3$ += 12;
+                }
+                if(houses3[9] == 1){
+                    aI1$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[9] == 2){
+                    aI1$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[9] == 3){
+                    aI1$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[9] == 4){
+                    aI1$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[9] == 5){
+                    aI1$ -= 900;
+                    aI3$ += 900;
+                }
+            }
+        }
+        if( aI1Spot%40 == 15){
+            pos1 = "Pennsylvania Railroad";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[10] == 0){
+                if(aI1$ >= prices[10]){
+                    owned[10] = 2;
+                    aI1$ -= prices[10];
+                }
+            }
+            if(owned[10] == 1){
+                if(owned[2] == 1 && owned[17] == 1 && owned[25] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[17] == 1) || (owned[2] == 1 && owned[25] == 1) || owned[17] == 1 && owned[25] == 1){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[17] == 1 || owned[25] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                else aI1$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[10] == 3){
+                if(owned[2] == 3 && owned[17] == 3 && owned[25] == 3){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[17] == 3) || (owned[2] == 3 && owned[25] == 3) || owned[17] == 3 && owned[25] == 3){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[17] == 3 || owned[25] == 3){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI2$ += 25;
+            }
+            if(owned[10] == 4){
+                if(owned[2] == 4 && owned[17] == 4 && owned[25] == 4){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[17] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[17] == 4 || owned[25] == 4){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI1Spot%40 == 16){
+            pos1 = "St. James Place";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[11] == 0){
+                if( aI1$ >= prices[11]){
+                    owned[11] = 2;
+                    aI1$ -= prices[11];
+                }
+            }
+            if(owned[11] == 1){
+                if(houses[11] == 0){
+                    aI1$ -= 14;
+                    player$ += 14;
+                }
+                if(houses[11] == 1){
+                    aI1$ -= 70;
+                    player$ += 70;
+                }
+                if(houses[11] == 2){
+                    aI1$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[11] == 3){
+                    aI1$ -= 550;
+                    player$ += 550;
+                }
+                if(houses[11] == 4){
+                    aI1$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[11] == 5){
+                    aI1$ -= 950;
+                    player$ += 950;
+                }
+            }
+            if(owned[11] == 3){
+                if(houses2[11] == 0){
+                    aI1$ -= 14;
+                    aI2$ += 14;
+                }
+                if(houses2[11] == 1){
+                    aI1$ -= 70;
+                    aI2$ += 70;
+                }
+                if(houses2[11] == 2){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[11] == 3){
+                    aI1$ -= 550;
+                    aI2$ += 550;
+                }
+                if(houses2[11] == 4){
+                    aI1$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[11] == 5){
+                    aI1$ -= 950;
+                    aI2$ += 950;
+                }
+            }
+            if(owned[11] == 4){
+                if(houses3[11] == 0){
+                    aI1$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[11] == 1){
+                    aI1$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[11] == 2){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[11] == 3){
+                    aI1$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[11] == 4){
+                    aI1$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[11] == 5){
+                    aI1$ -= 950;
+                    aI3$ += 950;
+                }
+            }
+        }
+        if( aI1Spot%40 == 17){
+            pos1 = "Community Chest";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            communityChest();
+        }
+        if( aI1Spot%40 == 18){
+            pos1 = "Tennessee Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[12] == 0){
+                if( aI1$ >= prices[12]){
+                    owned[12] = 2;
+                    aI1$ -= prices[12];
+                }
+            }
+            if(owned[12] == 1){
+                if(houses[12] == 0){
+                    aI1$ -= 14;
+                    player$ += 14;
+                }
+                if(houses[12] == 1){
+                    aI1$ -= 70;
+                    player$ += 70;
+                }
+                if(houses[12] == 2){
+                    aI1$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[12] == 3){
+                    aI1$ -= 550;
+                    player$ += 550;
+                }
+                if(houses[12] == 4){
+                    aI1$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[12] == 5){
+                    aI1$ -= 950;
+                    player$ += 950;
+                }
+            }
+            if(owned[12] == 3){
+                if(houses2[12] == 0){
+                    aI1$ -= 14;
+                    aI2$ += 14;
+                }
+                if(houses2[12] == 1){
+                    aI1$ -= 70;
+                    aI2$ += 70;
+                }
+                if(houses2[12] == 2){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[12] == 3){
+                    aI1$ -= 550;
+                    aI2$ += 550;
+                }
+                if(houses2[12] == 4){
+                    aI1$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[12] == 5){
+                    aI1$ -= 950;
+                    aI2$ += 950;
+                }
+            }
+            if(owned[12] == 4){
+                if(houses3[12] == 0){
+                    aI1$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[12] == 1){
+                    aI1$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[12] == 2){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[12] == 3){
+                    aI1$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[12] == 4){
+                    aI1$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[12] == 5){
+                    aI1$ -= 950;
+                    aI3$ += 950;
+                }
+            }
+        }
+        if( aI1Spot%40 == 19){
+            pos1 = "New York Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[13] == 0){
+                if( aI1$ >= prices[13]){
+                    owned[13] = 2;
+                    aI1$ -= prices[13];
+                }
+            }
+            if(owned[13] == 1){
+                if(houses[13] == 0){
+                    aI1$ -= 16;
+                    player$ += 16;
+                }
+                if(houses[13] == 1){
+                    aI1$ -= 80;
+                    player$ += 80;
+                }
+                if(houses[13] == 2){
+                    aI1$ -= 220;
+                    player$ += 220;
+                }
+                if(houses[13] == 3){
+                    aI1$ -= 600;
+                    player$ += 600;
+                }
+                if(houses[13] == 4){
+                    aI1$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[13] == 5){
+                    aI1$ -= 1000;
+                    player$ += 1000;
+                }
+            }
+            if(owned[13] == 3){
+                if(houses2[13] == 0){
+                    aI1$ -= 16;
+                    aI2$ += 16;
+                }
+                if(houses2[13] == 1){
+                    aI1$ -= 80;
+                    aI2$ += 80;
+                }
+                if(houses2[13] == 2){
+                    aI1$ -= 220;
+                    aI2$ += 220;
+                }
+                if(houses2[13] == 3){
+                    aI1$ -= 600;
+                    aI2$ += 600;
+                }
+                if(houses2[13] == 4){
+                    aI1$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[13] == 5){
+                    aI1$ -= 1000;
+                    aI2$ += 1000;
+                }
+            }
+            if(owned[13] == 4){
+                if(houses3[13] == 0){
+                    aI1$ -= 16;
+                    aI3$ += 16;
+                }
+                if(houses3[13] == 1){
+                    aI1$ -= 80;
+                    aI3$ += 80;
+                }
+                if(houses3[13] == 2){
+                    aI1$ -= 220;
+                    aI3$ += 220;
+                }
+                if(houses3[13] == 3){
+                    aI1$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[13] == 4){
+                    aI1$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[13] == 5){
+                    aI1$ -= 1000;
+                    aI3$ += 1000;
+                }
+            }
+        }
+        if( aI1Spot%40 == 20){
+            aI1$ += freeParking;
+            freeParking = 0;
+            pos1 = "Free Parking";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 21){
+            pos1 = "Kentucky Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[14] == 0){
+                if( aI1$ >= prices[14]){
+                    owned[14] = 2;
+                    aI1$ -= prices[14];
+                }
+            }
+            if(owned[14] == 1){
+                if(houses[14] == 0){
+                    aI1$ -= 18;
+                    player$ += 18;
+                }
+                if(houses[14] == 1){
+                    aI1$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[14] == 2){
+                    aI1$ -= 250;
+                    player$ += 250;
+                }
+                if(houses[14] == 3){
+                    aI1$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[14] == 4){
+                    aI1$ -= 875;
+                    player$ += 875;
+                }
+                if(houses[14] == 5){
+                    aI1$ -= 1050;
+                    player$ += 1050;
+                }
+            }
+            if(owned[14] == 3){
+                if(houses2[14] == 0){
+                    aI1$ -= 18;
+                    aI2$ += 18;
+                }
+                if(houses2[14] == 1){
+                    aI1$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[14] == 2){
+                    aI1$ -= 250;
+                    aI2$ += 250;
+                }
+                if(houses2[14] == 3){
+                    aI1$ -= 700;
+                    aI2$ += 700;
+                }
+                if(houses2[14] == 4){
+                    aI1$ -= 875;
+                    aI2$ += 875;
+                }
+                if(houses2[14] == 5){
+                    aI1$ -= 1050;
+                    aI2$ += 1050;
+                }
+            }
+            if(owned[14] == 4){
+                if(houses3[14] == 0){
+                    aI1$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[14] == 1){
+                    aI1$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[14] == 2){
+                    aI1$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[14] == 3){
+                    aI1$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[14] == 4){
+                    aI1$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[14] == 5){
+                    aI1$ -= 1050;
+                    aI3$ += 1050;
+                }
+            }
+        }
+        if( aI1Spot%40 == 22){
+            pos1 = "Chance";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            chance();
+        }
+        if( aI1Spot%40 == 23){
+            pos1 = "Indiana Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[15] == 0){
+                if( aI1$ >= prices[15]){
+                    owned[15] = 2;
+                    aI1$ -= prices[15];
+                }
+            }
+            if(owned[15] == 1){
+                if(houses[15] == 0){
+                    aI1$ -= 18;
+                    player$ += 18;
+                }
+                if(houses[15] == 1){
+                    aI1$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[15] == 2){
+                    aI1$ -= 250;
+                    player$ += 250;
+                }
+                if(houses[15] == 3){
+                    aI1$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[15] == 4){
+                    aI1$ -= 875;
+                    player$ += 875;
+                }
+                if(houses[15] == 5){
+                    aI1$ -= 1050;
+                    player$ += 1050;
+                }
+            }
+            if(owned[15] == 3){
+                if(houses2[15] == 0){
+                    aI1$ -= 18;
+                    aI2$ += 18;
+                }
+                if(houses2[15] == 1){
+                    aI1$ -= 90;
+                    aI2$ += 90;
+                }
+                if(houses2[15] == 2){
+                    aI1$ -= 250;
+                    aI2$ += 250;
+                }
+                if(houses2[15] == 3){
+                    aI1$ -= 700;
+                    aI2$ += 700;
+                }
+                if(houses2[15] == 4){
+                    aI1$ -= 875;
+                    aI2$ += 875;
+                }
+                if(houses2[15] == 5){
+                    aI1$ -= 1050;
+                    aI2$ += 1050;
+                }
+            }
+            if(owned[15] == 4){
+                if(houses3[15] == 0){
+                    aI1$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[15] == 1){
+                    aI1$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[15] == 2){
+                    aI1$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[15] == 3){
+                    aI1$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[15] == 4){
+                    aI1$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[15] == 5){
+                    aI1$ -= 1050;
+                    aI3$ += 1050;
+                }
+            }
+        }
+        if( aI1Spot%40 == 24){
+            pos1 = "Illinois Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[16] == 0){
+                if( aI1$ >= prices[16]){
+                    owned[16] = 2;
+                    aI1$ -= prices[16];
+                }
+            }
+            if(owned[16] == 1){
+                if(houses[16] == 0){
+                    aI1$ -= 20;
+                    player$ += 20;
+                }
+                if(houses[16] == 1){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                if(houses[16] == 2){
+                    aI1$ -= 300;
+                    player$ += 300;
+                }
+                if(houses[16] == 3){
+                    aI1$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[16] == 4){
+                    aI1$ -= 925;
+                    player$ += 925;
+                }
+                if(houses[16] == 5){
+                    aI1$ -= 1100;
+                    player$ += 1100;
+                }
+            }
+            if(owned[16] == 3){
+                if(houses2[16] == 0){
+                    aI1$ -= 20;
+                    aI2$ += 20;
+                }
+                if(houses2[16] == 1){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                if(houses2[16] == 2){
+                    aI1$ -= 300;
+                    aI2$ += 300;
+                }
+                if(houses2[16] == 3){
+                    aI1$ -= 750;
+                    aI2$ += 750;
+                }
+                if(houses2[16] == 4){
+                    aI1$ -= 925;
+                    aI2$ += 925;
+                }
+                if(houses2[16] == 5){
+                    aI1$ -= 1100;
+                    aI2$ += 1100;
+                }
+            }
+            if(owned[16] == 4){
+                if(houses3[16] == 0){
+                    aI1$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses3[16] == 1){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses3[16] == 2){
+                    aI1$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses3[16] == 3){
+                    aI1$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[16] == 4){
+                    aI1$ -= 925;
+                    aI3$ += 925;
+                }
+                if(houses3[16] == 5){
+                    aI1$ -= 1100;
+                    aI3$ += 1100;
+                }
+            }
+        }
+        if( aI1Spot%40 == 25){
+            pos1 = "B.& O. Railroad";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[17] == 0){
+                if(aI1$ >= prices[17]){
+                    owned[17] = 2;
+                    aI1$ -= prices[17];
+                }
+            }
+            if(owned[17] == 1){
+                if(owned[2] == 1 && owned[10] == 1 && owned[25] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[10] == 1) || (owned[2] == 1 && owned[25] == 1) || owned[10] == 1 && owned[25] == 1){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[10] == 1 || owned[25] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                else aI1$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[17] == 3){
+                if(owned[2] == 3 && owned[10] == 3 && owned[25] == 3){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[10] == 3) || (owned[2] == 3 && owned[25] == 3) || owned[10] == 3 && owned[25] == 3){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[10] == 3 || owned[25] == 3){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI2$ += 25;
+            }
+            if(owned[17] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[25] == 4){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[10] == 4 && owned[25] == 4){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[25] == 4){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI1Spot%40 == 26){
+            pos1 = "Atlantic Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[18] == 0){
+                if( aI1$ >= prices[18]){
+                    owned[18] = 2;
+                    aI1$ -= prices[18];
+                }
+            }
+            if(owned[18] == 1){
+                if(houses[18] == 0){
+                    aI1$ -= 22;
+                    player$ += 22;
+                }
+                if(houses[18] == 1){
+                    aI1$ -= 110;
+                    player$ += 110;
+                }
+                if(houses[18] == 2){
+                    aI1$ -= 330;
+                    player$ += 330;
+                }
+                if(houses[18] == 3){
+                    aI1$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[18] == 4){
+                    aI1$ -= 975;
+                    player$ += 975;
+                }
+                if(houses[18] == 5){
+                    aI1$ -= 1150;
+                    player$ += 1150;
+                }
+            }
+            if(owned[18] == 3){
+                if(houses2[18] == 0){
+                    aI1$ -= 22;
+                    aI2$ += 22;
+                }
+                if(houses2[18] == 1){
+                    aI1$ -= 110;
+                    aI2$ += 110;
+                }
+                if(houses2[18] == 2){
+                    aI1$ -= 330;
+                    aI2$ += 330;
+                }
+                if(houses2[18] == 3){
+                    aI1$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[18] == 4){
+                    aI1$ -= 975;
+                    aI2$ += 975;
+                }
+                if(houses2[18] == 5){
+                    aI1$ -= 1150;
+                    aI2$ += 1150;
+                }
+            }
+            if(owned[18] == 4){
+                if(houses3[18] == 0){
+                    aI1$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[18] == 1){
+                    aI1$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[18] == 2){
+                    aI1$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[18] == 3){
+                    aI1$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[18] == 4){
+                    aI1$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[18] == 5){
+                    aI1$ -= 1150;
+                    aI3$ += 1150;
+                }
+            }
+        }
+        if( aI1Spot%40 == 27){
+            pos1 = "Ventnor Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[19] == 0){
+                if( aI1$ >= prices[19]){
+                    owned[19] = 2;
+                    aI1$ -= prices[19];
+                }
+            }
+            if(owned[19] == 1){
+                if(houses[19] == 0){
+                    aI1$ -= 22;
+                    player$ += 22;
+                }
+                if(houses[19] == 1){
+                    aI1$ -= 110;
+                    player$ += 110;
+                }
+                if(houses[19] == 2){
+                    aI1$ -= 330;
+                    player$ += 330;
+                }
+                if(houses[19] == 3){
+                    aI1$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[19] == 4){
+                    aI1$ -= 975;
+                    player$ += 975;
+                }
+                if(houses[19] == 5){
+                    aI1$ -= 1150;
+                    player$ += 1150;
+                }
+            }
+            if(owned[19] == 3){
+                if(houses2[19] == 0){
+                    aI1$ -= 22;
+                    aI2$ += 22;
+                }
+                if(houses2[19] == 1){
+                    aI1$ -= 110;
+                    aI2$ += 110;
+                }
+                if(houses2[19] == 2){
+                    aI1$ -= 330;
+                    aI2$ += 330;
+                }
+                if(houses2[19] == 3){
+                    aI1$ -= 800;
+                    aI2$ += 800;
+                }
+                if(houses2[19] == 4){
+                    aI1$ -= 975;
+                    aI2$ += 975;
+                }
+                if(houses2[19] == 5){
+                    aI1$ -= 1150;
+                    aI2$ += 1150;
+                }
+            }
+            if(owned[19] == 4){
+                if(houses3[19] == 0){
+                    aI1$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[19] == 1){
+                    aI1$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[19] == 2){
+                    aI1$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[19] == 3){
+                    aI1$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[19] == 4){
+                    aI1$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[19] == 5){
+                    aI1$ -= 1150;
+                    aI3$ += 1150;
+                }
+            }
+        }
+        if( aI1Spot%40 == 28){
+            pos1 = "Water Works";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[20] == 0){
+                if(aI1$ >= prices[20]){
+                    owned[20] = 2;
+                    aI1$ -= prices[20];
+                }
+            }
+            if(owned[20] == 1){
+                if(owned[7] == 1){
+                    aI1$ -= roll * 10;
+                    player$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     player$ += roll * 4;
+            }
+            if(owned[20] == 3){
+                if(owned[7] == 3){
+                    aI1$ -= roll * 10;
+                    aI2$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     aI2$ += roll * 4;
+            }
+            if(owned[20] == 4){
+                if(owned[7] == 4){
+                    aI1$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else aI1$ -= roll * 4;
+                     aI3$ += roll * 4;
+            }
+        }
+        if( aI1Spot%40 == 29){
+            pos1 = "Marvin Gardens";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[21] == 0){
+                if( aI1$ >= prices[21]){
+                    owned[21] = 2;
+                    aI1$ -= prices[21];
+                }
+            }
+            if(owned[21] == 1){
+                if(houses[21] == 0){
+                    aI1$ -= 24;
+                    player$ += 24;
+                }
+                if(houses[21] == 1){
+                    aI1$ -= 120;
+                    player$ += 120;
+                }
+                if(houses[21] == 2){
+                    aI1$ -= 360;
+                    player$ += 360;
+                }
+                if(houses[21] == 3){
+                    aI1$ -= 850;
+                    player$ += 850;
+                }
+                if(houses[21] == 4){
+                    aI1$ -= 1025;
+                    player$ += 1025;
+                }
+                if(houses[21] == 5){
+                    aI1$ -= 1200;
+                    player$ += 1200;
+                }
+            }
+            if(owned[21] == 3){
+                if(houses2[21] == 0){
+                    aI1$ -= 24;
+                    aI2$ += 24;
+                }
+                if(houses2[21] == 1){
+                    aI1$ -= 120;
+                    aI2$ += 120;
+                }
+                if(houses2[21] == 2){
+                    aI1$ -= 360;
+                    aI2$ += 360;
+                }
+                if(houses2[21] == 3){
+                    aI1$ -= 850;
+                    aI2$ += 850;
+                }
+                if(houses2[21] == 4){
+                    aI1$ -= 1025;
+                    aI2$ += 1025;
+                }
+                if(houses2[21] == 5){
+                    aI1$ -= 1200;
+                    aI2$ += 1200;
+                }
+            }
+            if(owned[21] == 4){
+                if(houses3[21] == 0){
+                    aI1$ -= 24;
+                    aI3$ += 24;
+                }
+                if(houses3[21] == 1){
+                    aI1$ -= 120;
+                    aI3$ += 120;
+                }
+                if(houses3[21] == 2){
+                    aI1$ -= 360;
+                    aI3$ += 360;
+                }
+                if(houses3[21] == 3){
+                    aI1$ -= 850;
+                    aI3$ += 850;
+                }
+                if(houses3[21] == 4){
+                    aI1$ -= 1025;
+                    aI3$ += 1025;
+                }
+                if(houses3[21] == 5){
+                    aI1$ -= 1200;
+                    aI3$ += 1200;
+                }
+            }
+        }
+        if( aI1Spot%40 == 30){
+            inJail1 = true;
+            aI1Spot -= 20;
+            pos1 = "Jail";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 31){
+            pos1 = "Pacific Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[22] == 0){
+                if( aI1$ >= prices[22]){
+                    owned[22] = 2;
+                    aI1$ -= prices[22];
+                }
+            }
+            if(owned[22] == 1){
+                if(houses[22] == 0){
+                    aI1$ -= 26;
+                    player$ += 26;
+                }
+                if(houses[22] == 1){
+                    aI1$ -= 130;
+                    player$ += 130;
+                }
+                if(houses[22] == 2){
+                    aI1$ -= 390;
+                    player$ += 390;
+                }
+                if(houses[22] == 3){
+                    aI1$ -= 900;
+                    player$ += 900;
+                }
+                if(houses[22] == 4){
+                    aI1$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[22] == 5){
+                    aI1$ -= 1275;
+                    player$ += 1275;
+                }
+            }
+            if(owned[22] == 3){
+                if(houses2[22] == 0){
+                    aI1$ -= 26;
+                    aI2$ += 26;
+                }
+                if(houses2[22] == 1){
+                    aI1$ -= 130;
+                    aI2$ += 130;
+                }
+                if(houses2[22] == 2){
+                    aI1$ -= 390;
+                    aI2$ += 390;
+                }
+                if(houses2[22] == 3){
+                    aI1$ -= 900;
+                    aI2$ += 900;
+                }
+                if(houses2[22] == 4){
+                    aI1$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[22] == 5){
+                    aI1$ -= 1275;
+                    aI2$ += 1275;
+                }
+            }
+            if(owned[22] == 4){
+                if(houses3[22] == 0){
+                    aI1$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[22] == 1){
+                    aI1$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[22] == 2){
+                    aI1$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[22] == 3){
+                    aI1$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[22] == 4){
+                    aI1$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[22] == 5){
+                    aI1$ -= 1275;
+                    aI3$ += 1275;
+                }
+            }
+        }
+        if( aI1Spot%40 == 32){
+            pos1 = "North Carolina Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[23] == 0){
+                if( aI1$ >= prices[23]){
+                    owned[23] = 2;
+                    aI1$ -= prices[23];
+                }
+            }
+            if(owned[23] == 1){
+                if(houses[23] == 0){
+                    aI1$ -= 26;
+                    player$ += 26;
+                }
+                if(houses[23] == 1){
+                    aI1$ -= 130;
+                    player$ += 130;
+                }
+                if(houses[23] == 2){
+                    aI1$ -= 390;
+                    player$ += 390;
+                }
+                if(houses[23] == 3){
+                    aI1$ -= 900;
+                    player$ += 900;
+                }
+                if(houses[23] == 4){
+                    aI1$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[23] == 5){
+                    aI1$ -= 1275;
+                    player$ += 1275;
+                }
+            }
+            if(owned[23] == 3){
+                if(houses2[23] == 0){
+                    aI1$ -= 26;
+                    aI2$ += 26;
+                }
+                if(houses2[23] == 1){
+                    aI1$ -= 130;
+                    aI2$ += 130;
+                }
+                if(houses2[23] == 2){
+                    aI1$ -= 390;
+                    aI2$ += 390;
+                }
+                if(houses2[23] == 3){
+                    aI1$ -= 900;
+                    aI2$ += 900;
+                }
+                if(houses2[23] == 4){
+                    aI1$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[23] == 5){
+                    aI1$ -= 1275;
+                    aI2$ += 1275;
+                }
+            }
+            if(owned[23] == 4){
+                if(houses3[23] == 0){
+                    aI1$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[23] == 1){
+                    aI1$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[23] == 2){
+                    aI1$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[23] == 3){
+                    aI1$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[23] == 4){
+                    aI1$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[23] == 5){
+                    aI1$ -= 1275;
+                    aI3$ += 1275;
+                }
+            }
+        }
+        if( aI1Spot%40 == 33){
+            pos1 = "Community Chest";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            communityChest();
+        }
+        if( aI1Spot%40 == 34){
+            pos1 = "Pennsylvania Avenue";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[24] == 0){
+                if( aI1$ >= prices[24]){
+                    owned[24] = 2;
+                    aI1$ -= prices[24];
+                }
+            }
+            if(owned[24] == 1){
+                if(houses[24] == 0){
+                    aI1$ -= 28;
+                    player$ += 28;
+                }
+                if(houses[24] == 1){
+                    aI1$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[24] == 2){
+                    aI1$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[24] == 3){
+                    aI1$ -= 1000;
+                    player$ += 1000;
+                }
+                if(houses[24] == 4){
+                    aI1$ -= 1200;
+                    player$ += 1200;
+                }
+                if(houses[24] == 5){
+                    aI1$ -= 1400;
+                    player$ += 1400;
+                }
+            }
+            if(owned[24] == 3){
+                if(houses2[24] == 0){
+                    aI1$ -= 28;
+                    aI2$ += 28;
+                }
+                if(houses2[24] == 1){
+                    aI1$ -= 150;
+                    aI2$ += 150;
+                }
+                if(houses2[24] == 2){
+                    aI1$ -= 450;
+                    aI2$ += 450;
+                }
+                if(houses2[24] == 3){
+                    aI1$ -= 1000;
+                    aI2$ += 1000;
+                }
+                if(houses2[24] == 4){
+                    aI1$ -= 1200;
+                    aI2$ += 1200;
+                }
+                if(houses2[24] == 5){
+                    aI1$ -= 1400;
+                    aI2$ += 1400;
+                }
+            }
+            if(owned[24] == 4){
+                if(houses3[24] == 0){
+                    aI1$ -= 28;
+                    aI3$ += 28;
+                }
+                if(houses3[24] == 1){
+                    aI1$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[24] == 2){
+                    aI1$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[24] == 3){
+                    aI1$ -= 1000;
+                    aI3$ += 1000;
+                }
+                if(houses3[24] == 4){
+                    aI1$ -= 1200;
+                    aI3$ += 1200;
+                }
+                if(houses3[24] == 5){
+                    aI1$ -= 1400;
+                    aI3$ += 1400;
+                }
+            }
+        }
+        if( aI1Spot%40 == 35){
+            pos1 = "Short Line Railroad";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[25] == 0){
+                if(aI1$ >= prices[25]){
+                    owned[25] = 2;
+                    aI1$ -= prices[25];
+                }
+            }
+            if(owned[25] == 1){
+                if(owned[2] == 1 && owned[10] == 1 && owned[17] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[10] == 1) || (owned[2] == 1 && owned[17] == 1) || owned[10] == 1 && owned[17] == 1){
+                    aI1$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[10] == 1 || owned[17] == 1){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                else aI1$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[25] == 3){
+                if(owned[2] == 3 && owned[10] == 3 && owned[17] == 3){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                else if((owned[2] == 3 && owned[10] == 3) || (owned[2] == 3 && owned[17] == 3) || owned[10] == 3 && owned[17] == 3){
+                    aI1$ -= 100;
+                    aI2$ += 100;
+                }
+                else if(owned[2] == 3 || owned[10] == 3 || owned[17] == 3){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI2$ += 25;
+            }
+            if(owned[25] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[17] == 4){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[17] == 4) || owned[10] == 4 && owned[17] == 4){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[17] == 4){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI1Spot%40 == 36){
+            pos1 = "Chance";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            chance();
+        }
+        if( aI1Spot%40 == 37){
+            pos1 = "Park Place";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[26] == 0){
+                if( aI1$ >= prices[26]){
+                    owned[26] = 2;
+                    aI1$ -= prices[26];
+                }
+            }
+            if(owned[26] == 1){
+                if(houses[26] == 0){
+                    aI1$ -= 35;
+                    player$ += 35;
+                }
+                if(houses[26] == 1){
+                    aI1$ -= 175;
+                    player$ += 175;
+                }
+                if(houses[26] == 2){
+                    aI1$ -= 500;
+                    player$ += 500;
+                }
+                if(houses[26] == 3){
+                    aI1$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[26] == 4){
+                    aI1$ -= 1300;
+                    player$ += 1300;
+                }
+                if(houses[26] == 5){
+                    aI1$ -= 1500;
+                    player$ += 1500;
+                }
+            }
+            if(owned[26] == 3){
+                if(houses2[26] == 0){
+                    aI1$ -= 35;
+                    aI2$ += 35;
+                }
+                if(houses2[26] == 1){
+                    aI1$ -= 175;
+                    aI2$ += 175;
+                }
+                if(houses2[26] == 2){
+                    aI1$ -= 500;
+                    aI2$ += 500;
+                }
+                if(houses2[26] == 3){
+                    aI1$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[26] == 4){
+                    aI1$ -= 1300;
+                    aI2$ += 1300;
+                }
+                if(houses2[26] == 5){
+                    aI1$ -= 1500;
+                    aI2$ += 1500;
+                }
+            }
+            if(owned[26] == 4){
+                if(houses3[26] == 0){
+                    aI1$ -= 35;
+                    aI3$ += 35;
+                }
+                if(houses3[26] == 1){
+                    aI1$ -= 175;
+                    aI3$ += 175;
+                }
+                if(houses3[26] == 2){
+                    aI1$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[26] == 3){
+                    aI1$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[26] == 4){
+                    aI1$ -= 1300;
+                    aI3$ += 1300;
+                }
+                if(houses3[26] == 5){
+                    aI1$ -= 1500;
+                    aI3$ += 1500;
+                }
+            }
+        }
+        if( aI1Spot%40 == 38){
+            aI1$ -= 100;
+            freeParking += 100;
+            pos1 = "Luxury Tax";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 39){
+            pos1 = "Boardwalk";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[27] == 0){
+                if( aI1$ >= prices[27]){
+                    owned[27] = 2;
+                    aI1$ -= prices[27];
+                }
+            }
+            if(owned[27] == 1){
+                if(houses[27] == 0){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[27] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[27] == 2){
+                    aI1$ -= 600;
+                    player$ += 600;
+                }
+                if(houses[27] == 3){
+                    aI1$ -= 1400;
+                    player$ += 1400;
+                }
+                if(houses[27] == 4){
+                    aI1$ -= 1700;
+                    player$ += 1700;
+                }
+                if(houses[27] == 5){
+                    aI1$ -= 2000;
+                    player$ += 2000;
+                }
+            }
+            if(owned[27] == 3){
+                if(houses2[27] == 0){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[27] == 1){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[27] == 2){
+                    aI1$ -= 600;
+                    aI2$ += 600;
+                }
+                if(houses2[27] == 3){
+                    aI1$ -= 1400;
+                    aI2$ += 1400;
+                }
+                if(houses2[27] == 4){
+                    aI1$ -= 1700;
+                    aI2$ += 1700;
+                }
+                if(houses2[27] == 5){
+                    aI1$ -= 2000;
+                    aI2$ += 2000;
+                }
+            }
+            if(owned[27] == 4){
+                if(houses3[27] == 0){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[27] == 1){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[27] == 2){
+                    aI1$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[27] == 3){
+                    aI1$ -= 1400;
+                    aI3$ += 1400;
+                }
+                if(houses3[27] == 4){
+                    aI1$ -= 1700;
+                    aI3$ += 1700;
+                }
+                if(houses3[27] == 5){
+                    aI1$ -= 2000;
+                    aI3$ += 2000;
+                }
+            }
+        }
+        aI1M();
+        playerBox.setText("Player: $" + player$);
+        aIBox1.setText("A.I. 1: $" + aI1$);
+        aIBox2.setText("A.I. 2: $" + aI2$);
+        aIBox3.setText("A.I. 3: $" + aI3$);
+        System.out.println("A.I.1 Spot:" + aI1Spot);
+    }
+    public void aI2Turn(){
+        if(inJail2 == false){
+            roll = (int) (Math.random() * 11) + 2;
+            aI2Spot += roll;
+        }
+        if( aI2Spot%40 == 0 || aI2Spot > 40 * var02){
+            aI2$ += 200;
+            var02++;
+        }
+        if( aI2Spot%40 == 0){
+            pos2 = "Go!";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+        }
+        if( aI2Spot%40 == 1){
+            pos2 = "Mediterranean Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[0] == 0){
+                if( aI2$ >= prices[0]){
+                    owned[0] = 2;
+                    aI2$ -= prices[0];
+                }
+            }
+            if(owned[0] == 1){
+                if(houses[0] == 0){
+                    aI2$ -= 2;
+                    player$ += 2;
+                }
+                if(houses[0] == 1){
+                    aI2$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[0] == 2){
+                    aI2$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[0] == 3){
+                    aI2$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[0] == 4){
+                    aI2$ -= 160;
+                    player$ += 160;
+                }
+                if(houses[0] == 5){
+                    aI2$ -= 250;
+                    player$ += 250;
+                }
+            }
+            if(owned[0] == 2){
+                if(houses1[0] == 0){
+                    aI2$ -= 2;
+                    aI1$ += 2;
+                }
+                if(houses1[0] == 1){
+                    aI2$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[0] == 2){
+                    aI2$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[0] == 3){
+                    aI2$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[0] == 4){
+                    aI2$ -= 160;
+                    aI1$ += 160;
+                }
+                if(houses1[0] == 5){
+                    aI2$ -= 250;
+                    aI1$ += 250;
+                }
+            }
+            if(owned[0] == 4){
+                if(houses3[0] == 0){
+                    aI2$ -= 2;
+                    aI3$ += 2;
+                }
+                if(houses3[0] == 1){
+                    aI2$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[0] == 2){
+                    aI2$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[0] == 3){
+                    aI2$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[0] == 4){
+                    aI2$ -= 160;
+                    aI3$ += 160;
+                }
+                if(houses3[0] == 5){
+                    aI2$ -= 250;
+                    aI3$ += 250;
+                }
+            }
+        }
+        if( aI2Spot%40 == 2){
+            pos2 = "Community Chest";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            communityChest();
+        }
+        if( aI2Spot%40 == 3){
+            pos2 = "Baltic Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[1] == 0){
+                if( aI2$ >= prices[1]){
+                    owned[1] = 2;
+                    aI2$ -= prices[1];
+                }
+            }
+            if(owned[1] == 1){
+                if(houses[1] == 0){
+                    aI2$ -= 4;
+                    player$ += 4;
+                }
+                if(houses[1] == 1){
+                    aI2$ -= 20;
+                    player$ += 20;
+                }
+                if(houses[1] == 2){
+                    aI2$ -= 60;
+                    player$ += 60;
+                }
+                if(houses[1] == 3){
+                    aI2$ -= 180;
+                    player$ += 180;
+                }
+                if(houses[1] == 4){
+                    aI2$ -= 320;
+                    player$ += 320;
+                }
+                if(houses[1] == 5){
+                    aI2$ -= 450;
+                    player$ += 450;
+                }
+            }
+            if(owned[1] == 2){
+                if(houses1[1] == 0){
+                    aI2$ -= 4;
+                    aI1$ += 4;
+                }
+                if(houses1[1] == 1){
+                    aI2$ -= 20;
+                    aI1$ += 20;
+                }
+                if(houses1[1] == 2){
+                    aI2$ -= 60;
+                    aI1$ += 60;
+                }
+                if(houses1[1] == 3){
+                    aI2$ -= 180;
+                    aI1$ += 180;
+                }
+                if(houses1[1] == 4){
+                    aI2$ -= 320;
+                    aI1$ += 320;
+                }
+                if(houses1[1] == 5){
+                    aI2$ -= 450;
+                    aI1$ += 450;
+                }
+            }
+            if(owned[1] == 4){
+                if(houses3[1] == 0){
+                    aI2$ -= 4;
+                    aI3$ += 4;
+                }
+                if(houses3[1] == 1){
+                    aI2$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses3[1] == 2){
+                    aI2$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[1] == 3){
+                    aI2$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[1] == 4){
+                    aI2$ -= 320;
+                    aI3$ += 320;
+                }
+                if(houses3[1] == 5){
+                    aI2$ -= 450;
+                    aI3$ += 450;
+                }
+            }
+        }
+        if( aI2Spot%40 == 4){
+            aI2$ -= 200;
+            freeParking += 200;
+            pos2 = "Income Tax";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+        }
+        if( aI2Spot%40 == 5){
+            pos2 = "Reading Railroad";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[2] == 0){
+                if(aI2$ >= prices[2]){
+                    owned[2] = 2;
+                    aI2$ -= prices[2];
+                }
+            }
+            if(owned[2] == 1){
+                if(owned[10] == 1 && owned[17] == 1 && owned[25] == 1){
+                    aI2$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[10] == 1 && owned[17] == 1) || (owned[10] == 1 && owned[25] == 1) || owned[17] == 1 && owned[25] == 1){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[10] == 1 || owned[17] == 1 || owned[25] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                else aI2$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[2] == 2){
+                if(owned[10] == 2 && owned[17] == 2 && owned[25] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[10] == 2 && owned[17] == 2) || (owned[10] == 2 && owned[25] == 2) || owned[17] == 2 && owned[25] == 2){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[10] == 2 || owned[17] == 2 || owned[25] == 2){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI1$ += 25;
+            }
+            if(owned[2] == 4){
+                if(owned[10] == 4 && owned[17] == 4 && owned[25] == 4){
+                    aI2$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[10] == 4 && owned[17] == 4) || (owned[10] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    aI2$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[10] == 4 || owned[17] == 4 || owned[25] == 4){
+                    aI2$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI2Spot%40 == 6){
+            pos2 = "Oriental Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[3] == 0){
+                if( aI2$ >= prices[3]){
+                    owned[3] = 2;
+                    aI2$ -= prices[3];
+                }
+            }
+            if(owned[3] == 1){
+                if(houses[3] == 0){
+                    aI2$ -= 6;
+                    player$ += 6;
+                }
+                if(houses[3] == 1){
+                    aI2$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[3] == 2){
+                    aI2$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[3] == 3){
+                    aI2$ -= 270;
+                    player$ += 270;
+                }
+                if(houses[3] == 4){
+                    aI2$ -= 400;
+                    player$ += 400;
+                }
+                if(houses[3] == 5){
+                    aI2$ -= 550;
+                    player$ += 550;
+                }
+            }
+            if(owned[3] == 2){
+                if(houses1[3] == 0){
+                    aI2$ -= 6;
+                    aI1$ += 6;
+                }
+                if(houses1[3] == 1){
+                    aI2$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[3] == 2){
+                    aI2$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[3] == 3){
+                    aI2$ -= 270;
+                    aI1$ += 270;
+                }
+                if(houses1[3] == 4){
+                    aI2$ -= 400;
+                    aI1$ += 400;
+                }
+                if(houses1[3] == 5){
+                    aI2$ -= 550;
+                    aI1$ += 550;
+                }
+            }
+            if(owned[3] == 4){
+                if(houses3[3] == 0){
+                    aI2$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[3] == 1){
+                    aI2$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[3] == 2){
+                    aI2$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[3] == 3){
+                    aI2$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[3] == 4){
+                    aI2$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[3] == 5){
+                    aI2$ -= 550;
+                    aI3$ += 550;
+                }
+            }
+        }
+        if( aI2Spot%40 == 7){
+            pos2 = "Chance";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            chance();
+        }
+        if(aI2Spot%40 == 8){
+            pos2 = "Vermont Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[4] == 0){
+                if( aI2$ >= prices[4]){
+                    owned[4] = 2;
+                    aI2$ -= prices[4];
+                }
+            }
+            if(owned[4] == 1){
+                if(houses[4] == 0){
+                    aI2$ -= 6;
+                    player$ += 6;
+                }
+                if(houses[4] == 1){
+                    aI2$ -= 30;
+                    player$ += 30;
+                }
+                if(houses[4] == 2){
+                    aI2$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[4] == 3){
+                    aI2$ -= 270;
+                    player$ += 270;
+                }
+                if(houses[4] == 4){
+                    aI2$ -= 400;
+                    player$ += 400;
+                }
+                if(houses[4] == 5){
+                    aI2$ -= 550;
+                    player$ += 550;
+                }
+            }
+            if(owned[4] == 2){
+                if(houses1[4] == 0){
+                    aI2$ -= 6;
+                    aI1$ += 6;
+                }
+                if(houses1[4] == 1){
+                    aI2$ -= 30;
+                    aI1$ += 30;
+                }
+                if(houses1[4] == 2){
+                    aI2$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[4] == 3){
+                    aI2$ -= 270;
+                    aI1$ += 270;
+                }
+                if(houses1[4] == 4){
+                    aI2$ -= 400;
+                    aI1$ += 400;
+                }
+                if(houses1[4] == 5){
+                    aI2$ -= 550;
+                    aI1$ += 550;
+                }
+            }
+            if(owned[4] == 4){
+                if(houses3[4] == 0){
+                    aI2$ -= 6;
+                    aI3$ += 6;
+                }
+                if(houses3[4] == 1){
+                    aI2$ -= 30;
+                    aI3$ += 30;
+                }
+                if(houses3[4] == 2){
+                    aI2$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[4] == 3){
+                    aI2$ -= 270;
+                    aI3$ += 270;
+                }
+                if(houses3[4] == 4){
+                    aI2$ -= 400;
+                    aI3$ += 400;
+                }
+                if(houses3[4] == 5){
+                    aI2$ -= 550;
+                    aI3$ += 550;
+                }
+            }
+        }
+        if( aI2Spot%40 == 9){
+            pos2 = "Connecticut Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[5] == 0){
+                if( aI2$ >= prices[5]){
+                    owned[5] = 2;
+                    aI2$ -= prices[5];
+                }
+            }
+            if(owned[5] == 1){
+                if(houses[5] == 0){
+                    aI2$ -= 8;
+                    player$ += 8;
+                }
+                if(houses[5] == 1){
+                    aI2$ -= 40;
+                    player$ += 40;
+                }
+                if(houses[5] == 2){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                if(houses[5] == 3){
+                    aI2$ -= 300;
+                    player$ += 300;
+                }
+                if(houses[5] == 4){
+                    aI2$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[5] == 5){
+                    aI2$ -= 600;
+                    player$ += 600;
+                }
+            }
+            if(owned[5] == 3){
+                if(houses1[5] == 0){
+                    aI2$ -= 8;
+                    aI1$ += 8;
+                }
+                if(houses1[5] == 1){
+                    aI2$ -= 40;
+                    aI1$ += 40;
+                }
+                if(houses1[5] == 2){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                if(houses1[5] == 3){
+                    aI2$ -= 300;
+                    aI1$ += 300;
+                }
+                if(houses1[5] == 4){
+                    aI2$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[5] == 5){
+                    aI2$ -= 600;
+                    aI1$ += 600;
+                }
+            }
+            if(owned[5] == 4){
+                if(houses3[5] == 0){
+                    aI2$ -= 8;
+                    aI3$ += 8;
+                }
+                if(houses3[5] == 1){
+                    aI2$ -= 40;
+                    aI3$ += 40;
+                }
+                if(houses3[5] == 2){
+                    aI2$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses3[5] == 3){
+                    aI2$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses3[5] == 4){
+                    aI2$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[5] == 5){
+                    aI2$ -= 600;
+                    aI3$ += 600;
+                }
+            }
+        }
+        if( aI2Spot%40 == 10){
+            pos2 = "Just Visiting";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(inJail2){
+                pos2 = "Jail";
+                aIPosBox2.setText("A.I.Pos 2: " + pos2);
+                for(int i = 0; i < 3; i++){
+                    if((int) (Math.random() * 6) == (int) (Math.random() * 6)){
+                        inJail2 = false;
+                    }
+                }
+            }
+            if(inJail2 == false){
+                pos2 = "Just Visiting";
+                aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            }
+        }
+        if( aI2Spot%40 == 11){
+            pos2 = "St. Charles Place";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[6] == 0){
+                if( aI2$ >= prices[6]){
+                    owned[6] = 2;
+                    aI2$ -= prices[6];
+                }
+            }
+            if(owned[6] == 1){
+                if(houses[6] == 0){
+                    aI2$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[6] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[6] == 2){
+                    aI2$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[6] == 3){
+                    aI2$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[6] == 4){
+                    aI2$ -= 625;
+                    player$ += 625;
+                }
+                if(houses[6] == 5){
+                    aI2$ -= 750;
+                    player$ += 750;
+                }
+            }
+            if(owned[6] == 2){
+                if(houses1[6] == 0){
+                    aI2$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[6] == 1){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                if(houses1[6] == 2){
+                    aI2$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[6] == 3){
+                    aI2$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[6] == 4){
+                    aI2$ -= 625;
+                    aI1$ += 625;
+                }
+                if(houses1[6] == 5){
+                    aI2$ -= 750;
+                    aI1$ += 750;
+                }
+            }
+            if(owned[6] == 4){
+                if(houses3[6] == 0){
+                    aI2$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[6] == 1){
+                    aI2$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[6] == 2){
+                    aI2$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[6] == 3){
+                    aI2$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[6] == 4){
+                    aI2$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[6] == 5){
+                    aI2$ -= 750;
+                    aI3$ += 750;
+                }
+            }
+        }
+        if( aI2Spot%40 == 12){
+            pos2 = "Electric Company";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[7] == 0){
+                if(aI2$ >= prices[7]){
+                    owned[7] = 2;
+                    aI2$ -= prices[7];
+                }
+            }
+            if(owned[7] == 1){
+                if(owned[20] == 1){
+                    aI2$ -= roll * 10;
+                    player$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     player$ += roll * 4;
+            }
+            if(owned[7] == 2){
+                if(owned[20] == 2){
+                    aI2$ -= roll * 10;
+                    aI1$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     aI1$ += roll * 4;
+            }
+            if(owned[7] == 4){
+                if(owned[20] == 4){
+                    aI2$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     aI3$ += roll * 4;
+            }
+        }
+        if( aI2Spot%40 == 13){
+            pos2 = "States Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[8] == 0){
+                if( aI2$ >= prices[8]){
+                    owned[8] = 2;
+                    aI2$ -= prices[8];
+                }
+            }
+            if(owned[8] == 1){
+                if(houses[8] == 0){
+                    aI2$ -= 10;
+                    player$ += 10;
+                }
+                if(houses[8] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[8] == 2){
+                    aI2$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[8] == 3){
+                    aI2$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[8] == 4){
+                    aI2$ -= 625;
+                    player$ += 625;
+                }
+                if(houses[8] == 5){
+                    aI2$ -= 750;
+                    player$ += 750;
+                }
+            }
+            if(owned[8] == 2){
+                if(houses1[8] == 0){
+                    aI2$ -= 10;
+                    aI1$ += 10;
+                }
+                if(houses1[8] == 1){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                if(houses1[8] == 2){
+                    aI2$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[8] == 3){
+                    aI2$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[8] == 4){
+                    aI2$ -= 625;
+                    aI1$ += 625;
+                }
+                if(houses1[8] == 5){
+                    aI2$ -= 750;
+                    aI1$ += 750;
+                }
+            }
+            if(owned[8] == 4){
+                if(houses3[8] == 0){
+                    aI2$ -= 10;
+                    aI3$ += 10;
+                }
+                if(houses3[8] == 1){
+                    aI2$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[8] == 2){
+                    aI2$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[8] == 3){
+                    aI2$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[8] == 4){
+                    aI2$ -= 625;
+                    aI3$ += 625;
+                }
+                if(houses3[8] == 5){
+                    aI2$ -= 750;
+                    aI3$ += 750;
+                }
+            }
+        }
+        if( aI2Spot%40 == 14){
+            pos2 = "Virgina Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[9] == 0){
+                if( aI2$ >= prices[9]){
+                    owned[9] = 2;
+                    aI2$ -= prices[9];
+                }
+            }
+            if(owned[9] == 1){
+                if(houses[9] == 0){
+                    aI2$ -= 12;
+                    player$ += 12;
+                }
+                if(houses[9] == 1){
+                    aI2$ -= 60;
+                    player$ += 60;
+                }
+                if(houses[9] == 2){
+                    aI2$ -= 180;
+                    player$ += 180;
+                }
+                if(houses[9] == 3){
+                    aI2$ -= 500;
+                    player$ += 500;
+                }
+                if(houses[9] == 4){
+                    aI2$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[9] == 5){
+                    aI2$ -= 900;
+                    player$ += 900;
+                }
+            }
+            if(owned[9] == 3){
+                if(houses1[9] == 0){
+                    aI2$ -= 12;
+                    aI1$ += 12;
+                }
+                if(houses1[9] == 1){
+                    aI2$ -= 60;
+                    aI1$ += 60;
+                }
+                if(houses1[9] == 2){
+                    aI2$ -= 180;
+                    aI1$ += 180;
+                }
+                if(houses1[9] == 3){
+                    aI2$ -= 500;
+                    aI1$ += 500;
+                }
+                if(houses1[9] == 4){
+                    aI2$ -= 700;
+                    aI1$ += 700;
+                }
+                if(houses1[9] == 5){
+                    aI2$ -= 900;
+                    aI1$ += 900;
+                }
+            }
+            if(owned[9] == 4){
+                if(houses3[9] == 0){
+                    aI2$ -= 12;
+                    aI3$ += 12;
+                }
+                if(houses3[9] == 1){
+                    aI2$ -= 60;
+                    aI3$ += 60;
+                }
+                if(houses3[9] == 2){
+                    aI2$ -= 180;
+                    aI3$ += 180;
+                }
+                if(houses3[9] == 3){
+                    aI2$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[9] == 4){
+                    aI2$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[9] == 5){
+                    aI2$ -= 900;
+                    aI3$ += 900;
+                }
+            }
+        }
+        if( aI2Spot%40 == 15){
+            pos2 = "Pennsylvania Railroad";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[10] == 0){
+                if(aI2$ >= prices[10]){
+                    owned[10] = 2;
+                    aI2$ -= prices[10];
+                }
+            }
+            if(owned[10] == 1){
+                if(owned[2] == 1 && owned[17] == 1 && owned[25] == 1){
+                    aI2$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[17] == 1) || (owned[2] == 1 && owned[25] == 1) || owned[17] == 1 && owned[25] == 1){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[17] == 1 || owned[25] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                else aI2$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[10] == 2){
+                if(owned[2] == 2 && owned[17] == 2 && owned[25] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[17] == 2) || (owned[2] == 2 && owned[25] == 2) || owned[17] == 2 && owned[25] == 2){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[17] == 2 || owned[25] == 2){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI1$ += 25;
+            }
+            if(owned[10] == 4){
+                if(owned[2] == 4 && owned[17] == 4 && owned[25] == 4){
+                    aI2$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[17] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[17] == 4 && owned[25] == 4){
+                    aI2$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[17] == 4 || owned[25] == 4){
+                    aI2$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI2Spot%40 == 16){
+            pos2 = "St. James Place";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[11] == 0){
+                if( aI2$ >= prices[11]){
+                    owned[11] = 2;
+                    aI2$ -= prices[11];
+                }
+            }
+            if(owned[11] == 1){
+                if(houses[11] == 0){
+                    aI2$ -= 14;
+                    player$ += 14;
+                }
+                if(houses[11] == 1){
+                    aI2$ -= 70;
+                    player$ += 70;
+                }
+                if(houses[11] == 2){
+                    aI2$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[11] == 3){
+                    aI2$ -= 550;
+                    player$ += 550;
+                }
+                if(houses[11] == 4){
+                    aI2$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[11] == 5){
+                    aI2$ -= 950;
+                    player$ += 950;
+                }
+            }
+            if(owned[11] == 3){
+                if(houses1[11] == 0){
+                    aI2$ -= 14;
+                    aI1$ += 14;
+                }
+                if(houses1[11] == 1){
+                    aI2$ -= 70;
+                    aI1$ += 70;
+                }
+                if(houses1[11] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                if(houses1[11] == 3){
+                    aI2$ -= 550;
+                    aI1$ += 550;
+                }
+                if(houses1[11] == 4){
+                    aI2$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[11] == 5){
+                    aI2$ -= 950;
+                    aI1$ += 950;
+                }
+            }
+            if(owned[11] == 4){
+                if(houses3[11] == 0){
+                    aI2$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[11] == 1){
+                    aI2$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[11] == 2){
+                    aI2$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[11] == 3){
+                    aI2$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[11] == 4){
+                    aI2$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[11] == 5){
+                    aI2$ -= 950;
+                    aI3$ += 950;
+                }
+            }
+        }
+        if( aI2Spot%40 == 17){
+            pos2 = "Community Chest";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            communityChest();
+        }
+        if( aI2Spot%40 == 18){
+            pos2 = "Tennessee Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[12] == 0){
+                if( aI2$ >= prices[12]){
+                    owned[12] = 2;
+                    aI2$ -= prices[12];
+                }
+            }
+            if(owned[12] == 1){
+                if(houses[12] == 0){
+                    aI2$ -= 14;
+                    player$ += 14;
+                }
+                if(houses[12] == 1){
+                    aI2$ -= 70;
+                    player$ += 70;
+                }
+                if(houses[12] == 2){
+                    aI2$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[12] == 3){
+                    aI2$ -= 550;
+                    player$ += 550;
+                }
+                if(houses[12] == 4){
+                    aI2$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[12] == 5){
+                    aI2$ -= 950;
+                    player$ += 950;
+                }
+            }
+            if(owned[12] == 2){
+                if(houses1[12] == 0){
+                    aI2$ -= 14;
+                    aI1$ += 14;
+                }
+                if(houses1[12] == 1){
+                    aI2$ -= 70;
+                    aI1$ += 70;
+                }
+                if(houses1[12] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                if(houses1[12] == 3){
+                    aI2$ -= 550;
+                    aI1$ += 550;
+                }
+                if(houses1[12] == 4){
+                    aI2$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[12] == 5){
+                    aI2$ -= 950;
+                    aI1$ += 950;
+                }
+            }
+            if(owned[12] == 4){
+                if(houses3[12] == 0){
+                    aI2$ -= 14;
+                    aI3$ += 14;
+                }
+                if(houses3[12] == 1){
+                    aI2$ -= 70;
+                    aI3$ += 70;
+                }
+                if(houses3[12] == 2){
+                    aI2$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[12] == 3){
+                    aI2$ -= 550;
+                    aI3$ += 550;
+                }
+                if(houses3[12] == 4){
+                    aI2$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[12] == 5){
+                    aI2$ -= 950;
+                    aI3$ += 950;
+                }
+            }
+        }
+        if( aI2Spot%40 == 19){
+            pos2 = "New York Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[13] == 0){
+                if( aI2$ >= prices[13]){
+                    owned[13] = 2;
+                    aI2$ -= prices[13];
+                }
+            }
+            if(owned[13] == 1){
+                if(houses[13] == 0){
+                    aI2$ -= 16;
+                    player$ += 16;
+                }
+                if(houses[13] == 1){
+                    aI2$ -= 80;
+                    player$ += 80;
+                }
+                if(houses[13] == 2){
+                    aI2$ -= 220;
+                    player$ += 220;
+                }
+                if(houses[13] == 3){
+                    aI2$ -= 600;
+                    player$ += 600;
+                }
+                if(houses[13] == 4){
+                    aI2$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[13] == 5){
+                    aI2$ -= 1000;
+                    player$ += 1000;
+                }
+            }
+            if(owned[13] == 2){
+                if(houses1[13] == 0){
+                    aI2$ -= 16;
+                    aI1$ += 16;
+                }
+                if(houses1[13] == 1){
+                    aI2$ -= 80;
+                    aI1$ += 80;
+                }
+                if(houses1[13] == 2){
+                    aI2$ -= 220;
+                    aI1$ += 220;
+                }
+                if(houses1[13] == 3){
+                    aI2$ -= 600;
+                    aI1$ += 600;
+                }
+                if(houses1[13] == 4){
+                    aI2$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[13] == 5){
+                    aI2$ -= 1000;
+                    aI1$ += 1000;
+                }
+            }
+            if(owned[13] == 4){
+                if(houses3[13] == 0){
+                    aI2$ -= 16;
+                    aI3$ += 16;
+                }
+                if(houses3[13] == 1){
+                    aI2$ -= 80;
+                    aI3$ += 80;
+                }
+                if(houses3[13] == 2){
+                    aI2$ -= 220;
+                    aI3$ += 220;
+                }
+                if(houses3[13] == 3){
+                    aI2$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[13] == 4){
+                    aI2$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[13] == 5){
+                    aI2$ -= 1000;
+                    aI3$ += 1000;
+                }
+            }
+        }
+        if( aI2Spot%40 == 20){
+            aI2$ += freeParking;
+            freeParking = 0;
+            pos2 = "Free Parking";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+        }
+        if( aI2Spot%40 == 21){
+            pos2 = "Kentucky Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[14] == 0){
+                if( aI2$ >= prices[14]){
+                    owned[14] = 2;
+                    aI2$ -= prices[14];
+                }
+            }
+            if(owned[14] == 1){
+                if(houses[14] == 0){
+                    aI2$ -= 18;
+                    player$ += 18;
+                }
+                if(houses[14] == 1){
+                    aI2$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[14] == 2){
+                    aI2$ -= 250;
+                    player$ += 250;
+                }
+                if(houses[14] == 3){
+                    aI2$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[14] == 4){
+                    aI2$ -= 875;
+                    player$ += 875;
+                }
+                if(houses[14] == 5){
+                    aI2$ -= 1050;
+                    player$ += 1050;
+                }
+            }
+            if(owned[14] == 2){
+                if(houses1[14] == 0){
+                    aI2$ -= 18;
+                    aI1$ += 18;
+                }
+                if(houses1[14] == 1){
+                    aI2$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[14] == 2){
+                    aI2$ -= 250;
+                    aI1$ += 250;
+                }
+                if(houses1[14] == 3){
+                    aI2$ -= 700;
+                    aI1$ += 700;
+                }
+                if(houses1[14] == 4){
+                    aI2$ -= 875;
+                    aI1$ += 875;
+                }
+                if(houses1[14] == 5){
+                    aI2$ -= 1050;
+                    aI1$ += 1050;
+                }
+            }
+            if(owned[14] == 4){
+                if(houses3[14] == 0){
+                    aI2$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[14] == 1){
+                    aI2$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[14] == 2){
+                    aI2$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[14] == 3){
+                    aI2$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[14] == 4){
+                    aI2$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[14] == 5){
+                    aI2$ -= 1050;
+                    aI3$ += 1050;
+                }
+            }
+        }
+        if( aI2Spot%40 == 22){
+            pos2 = "Chance";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            chance();
+        }
+        if( aI2Spot%40 == 23){
+            pos2 = "Indiana Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[15] == 0){
+                if( aI2$ >= prices[15]){
+                    owned[15] = 2;
+                    aI2$ -= prices[15];
+                }
+            }
+            if(owned[15] == 1){
+                if(houses[15] == 0){
+                    aI2$ -= 18;
+                    player$ += 18;
+                }
+                if(houses[15] == 1){
+                    aI2$ -= 90;
+                    player$ += 90;
+                }
+                if(houses[15] == 2){
+                    aI2$ -= 250;
+                    player$ += 250;
+                }
+                if(houses[15] == 3){
+                    aI2$ -= 700;
+                    player$ += 700;
+                }
+                if(houses[15] == 4){
+                    aI2$ -= 875;
+                    player$ += 875;
+                }
+                if(houses[15] == 5){
+                    aI2$ -= 1050;
+                    player$ += 1050;
+                }
+            }
+            if(owned[15] == 2){
+                if(houses1[15] == 0){
+                    aI2$ -= 18;
+                    aI1$ += 18;
+                }
+                if(houses1[15] == 1){
+                    aI2$ -= 90;
+                    aI1$ += 90;
+                }
+                if(houses1[15] == 2){
+                    aI2$ -= 250;
+                    aI1$ += 250;
+                }
+                if(houses1[15] == 3){
+                    aI2$ -= 700;
+                    aI1$ += 700;
+                }
+                if(houses1[15] == 4){
+                    aI2$ -= 875;
+                    aI1$ += 875;
+                }
+                if(houses1[15] == 5){
+                    aI2$ -= 1050;
+                    aI1$ += 1050;
+                }
+            }
+            if(owned[15] == 4){
+                if(houses3[15] == 0){
+                    aI2$ -= 18;
+                    aI3$ += 18;
+                }
+                if(houses3[15] == 1){
+                    aI2$ -= 90;
+                    aI3$ += 90;
+                }
+                if(houses3[15] == 2){
+                    aI2$ -= 250;
+                    aI3$ += 250;
+                }
+                if(houses3[15] == 3){
+                    aI2$ -= 700;
+                    aI3$ += 700;
+                }
+                if(houses3[15] == 4){
+                    aI2$ -= 875;
+                    aI3$ += 875;
+                }
+                if(houses3[15] == 5){
+                    aI2$ -= 1050;
+                    aI3$ += 1050;
+                }
+            }
+        }
+        if( aI2Spot%40 == 24){
+            pos2 = "Illinois Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[16] == 0){
+                if( aI2$ >= prices[16]){
+                    owned[16] = 2;
+                    aI2$ -= prices[16];
+                }
+            }
+            if(owned[16] == 1){
+                if(houses[16] == 0){
+                    aI2$ -= 20;
+                    player$ += 20;
+                }
+                if(houses[16] == 1){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                if(houses[16] == 2){
+                    aI2$ -= 300;
+                    player$ += 300;
+                }
+                if(houses[16] == 3){
+                    aI2$ -= 750;
+                    player$ += 750;
+                }
+                if(houses[16] == 4){
+                    aI2$ -= 925;
+                    player$ += 925;
+                }
+                if(houses[16] == 5){
+                    aI2$ -= 1100;
+                    player$ += 1100;
+                }
+            }
+            if(owned[16] == 2){
+                if(houses1[16] == 0){
+                    aI2$ -= 20;
+                    aI2$ += 20;
+                }
+                if(houses1[16] == 1){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                if(houses1[16] == 2){
+                    aI2$ -= 300;
+                    aI1$ += 300;
+                }
+                if(houses1[16] == 3){
+                    aI2$ -= 750;
+                    aI1$ += 750;
+                }
+                if(houses1[16] == 4){
+                    aI2$ -= 925;
+                    aI1$ += 925;
+                }
+                if(houses1[16] == 5){
+                    aI2$ -= 1100;
+                    aI1$ += 1100;
+                }
+            }
+            if(owned[16] == 4){
+                if(houses3[16] == 0){
+                    aI2$ -= 20;
+                    aI3$ += 20;
+                }
+                if(houses3[16] == 1){
+                    aI2$ -= 100;
+                    aI3$ += 100;
+                }
+                if(houses3[16] == 2){
+                    aI2$ -= 300;
+                    aI3$ += 300;
+                }
+                if(houses3[16] == 3){
+                    aI2$ -= 750;
+                    aI3$ += 750;
+                }
+                if(houses3[16] == 4){
+                    aI2$ -= 925;
+                    aI3$ += 925;
+                }
+                if(houses3[16] == 5){
+                    aI2$ -= 1100;
+                    aI3$ += 1100;
+                }
+            }
+        }
+        if( aI2Spot%40 == 25){
+            pos2 = "B.& O. Railroad";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[17] == 0){
+                if(aI2$ >= prices[17]){
+                    owned[17] = 2;
+                    aI2$ -= prices[17];
+                }
+            }
+            if(owned[17] == 1){
+                if(owned[2] == 1 && owned[10] == 1 && owned[25] == 1){
+                    aI2$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[10] == 1) || (owned[2] == 1 && owned[25] == 1) || owned[10] == 1 && owned[25] == 1){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[10] == 1 || owned[25] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                else aI2$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[17] == 2){
+                if(owned[2] == 2 && owned[10] == 2 && owned[25] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[10] == 2) || (owned[2] == 2 && owned[25] == 2) || owned[10] == 2 && owned[25] == 2){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[10] == 2 || owned[25] == 2){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI1$ += 25;
+            }
+            if(owned[17] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[25] == 4){
+                    aI2$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[25] == 4) || owned[10] == 4 && owned[25] == 4){
+                    aI2$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[25] == 4){
+                    aI2$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI2Spot%40 == 26){
+            pos2 = "Atlantic Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[18] == 0){
+                if( aI2$ >= prices[18]){
+                    owned[18] = 2;
+                    aI2$ -= prices[18];
+                }
+            }
+            if(owned[18] == 1){
+                if(houses[18] == 0){
+                    aI2$ -= 22;
+                    player$ += 22;
+                }
+                if(houses[18] == 1){
+                    aI2$ -= 110;
+                    player$ += 110;
+                }
+                if(houses[18] == 2){
+                    aI2$ -= 330;
+                    player$ += 330;
+                }
+                if(houses[18] == 3){
+                    aI2$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[18] == 4){
+                    aI2$ -= 975;
+                    player$ += 975;
+                }
+                if(houses[18] == 5){
+                    aI2$ -= 1150;
+                    player$ += 1150;
+                }
+            }
+            if(owned[18] == 3){
+                if(houses1[18] == 0){
+                    aI2$ -= 22;
+                    aI1$ += 22;
+                }
+                if(houses1[18] == 1){
+                    aI2$ -= 110;
+                    aI1$ += 110;
+                }
+                if(houses1[18] == 2){
+                    aI2$ -= 330;
+                    aI1$ += 330;
+                }
+                if(houses1[18] == 3){
+                    aI2$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[18] == 4){
+                    aI2$ -= 975;
+                    aI1$ += 975;
+                }
+                if(houses1[18] == 5){
+                    aI2$ -= 1150;
+                    aI1$ += 1150;
+                }
+            }
+            if(owned[18] == 4){
+                if(houses3[18] == 0){
+                    aI2$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[18] == 1){
+                    aI2$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[18] == 2){
+                    aI2$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[18] == 3){
+                    aI2$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[18] == 4){
+                    aI2$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[18] == 5){
+                    aI2$ -= 1150;
+                    aI3$ += 1150;
+                }
+            }
+        }
+        if( aI2Spot%40 == 27){
+            pos2 = "Ventnor Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[19] == 0){
+                if( aI2$ >= prices[19]){
+                    owned[19] = 2;
+                    aI2$ -= prices[19];
+                }
+            }
+            if(owned[19] == 1){
+                if(houses[19] == 0){
+                    aI2$ -= 22;
+                    player$ += 22;
+                }
+                if(houses[19] == 1){
+                    aI2$ -= 110;
+                    player$ += 110;
+                }
+                if(houses[19] == 2){
+                    aI2$ -= 330;
+                    player$ += 330;
+                }
+                if(houses[19] == 3){
+                    aI2$ -= 800;
+                    player$ += 800;
+                }
+                if(houses[19] == 4){
+                    aI2$ -= 975;
+                    player$ += 975;
+                }
+                if(houses[19] == 5){
+                    aI2$ -= 1150;
+                    player$ += 1150;
+                }
+            }
+            if(owned[19] == 3){
+                if(houses1[19] == 0){
+                    aI2$ -= 22;
+                    aI1$ += 22;
+                }
+                if(houses1[19] == 1){
+                    aI2$ -= 110;
+                    aI1$ += 110;
+                }
+                if(houses1[19] == 2){
+                    aI2$ -= 330;
+                    aI1$ += 330;
+                }
+                if(houses1[19] == 3){
+                    aI2$ -= 800;
+                    aI1$ += 800;
+                }
+                if(houses1[19] == 4){
+                    aI2$ -= 975;
+                    aI1$ += 975;
+                }
+                if(houses1[19] == 5){
+                    aI2$ -= 1150;
+                    aI1$ += 1150;
+                }
+            }
+            if(owned[19] == 4){
+                if(houses3[19] == 0){
+                    aI2$ -= 22;
+                    aI3$ += 22;
+                }
+                if(houses3[19] == 1){
+                    aI2$ -= 110;
+                    aI3$ += 110;
+                }
+                if(houses3[19] == 2){
+                    aI2$ -= 330;
+                    aI3$ += 330;
+                }
+                if(houses3[19] == 3){
+                    aI2$ -= 800;
+                    aI3$ += 800;
+                }
+                if(houses3[19] == 4){
+                    aI2$ -= 975;
+                    aI3$ += 975;
+                }
+                if(houses3[19] == 5){
+                    aI2$ -= 1150;
+                    aI3$ += 1150;
+                }
+            }
+        }
+        if( aI2Spot%40 == 28){
+            pos2 = "Water Works";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[20] == 0){
+                if(aI2$ >= prices[20]){
+                    owned[20] = 2;
+                    aI2$ -= prices[20];
+                }
+            }
+            if(owned[20] == 1){
+                if(owned[7] == 1){
+                    aI2$ -= roll * 10;
+                    player$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     player$ += roll * 4;
+            }
+            if(owned[20] == 2){
+                if(owned[7] == 2){
+                    aI2$ -= roll * 10;
+                    aI1$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     aI1$ += roll * 4;
+            }
+            if(owned[20] == 4){
+                if(owned[7] == 4){
+                    aI2$ -= roll * 10;
+                    aI3$ += roll * 10;
+                }
+                else aI2$ -= roll * 4;
+                     aI3$ += roll * 4;
+            }
+        }
+        if( aI2Spot%40 == 29){
+            pos2 = "Marvin Gardens";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[21] == 0){
+                if( aI2$ >= prices[21]){
+                    owned[21] = 2;
+                    aI2$ -= prices[21];
+                }
+            }
+            if(owned[21] == 1){
+                if(houses[21] == 0){
+                    aI2$ -= 24;
+                    player$ += 24;
+                }
+                if(houses[21] == 1){
+                    aI2$ -= 120;
+                    player$ += 120;
+                }
+                if(houses[21] == 2){
+                    aI2$ -= 360;
+                    player$ += 360;
+                }
+                if(houses[21] == 3){
+                    aI2$ -= 850;
+                    player$ += 850;
+                }
+                if(houses[21] == 4){
+                    aI2$ -= 1025;
+                    player$ += 1025;
+                }
+                if(houses[21] == 5){
+                    aI2$ -= 1200;
+                    player$ += 1200;
+                }
+            }
+            if(owned[21] == 2){
+                if(houses1[21] == 0){
+                    aI2$ -= 24;
+                    aI1$ += 24;
+                }
+                if(houses1[21] == 1){
+                    aI2$ -= 120;
+                    aI1$ += 120;
+                }
+                if(houses1[21] == 2){
+                    aI2$ -= 360;
+                    aI1$ += 360;
+                }
+                if(houses1[21] == 3){
+                    aI2$ -= 850;
+                    aI1$ += 850;
+                }
+                if(houses1[21] == 4){
+                    aI2$ -= 1025;
+                    aI1$ += 1025;
+                }
+                if(houses1[21] == 5){
+                    aI2$ -= 1200;
+                    aI1$ += 1200;
+                }
+            }
+            if(owned[21] == 4){
+                if(houses3[21] == 0){
+                    aI2$ -= 24;
+                    aI3$ += 24;
+                }
+                if(houses3[21] == 1){
+                    aI2$ -= 120;
+                    aI3$ += 120;
+                }
+                if(houses3[21] == 2){
+                    aI2$ -= 360;
+                    aI3$ += 360;
+                }
+                if(houses3[21] == 3){
+                    aI2$ -= 850;
+                    aI3$ += 850;
+                }
+                if(houses3[21] == 4){
+                    aI2$ -= 1025;
+                    aI3$ += 1025;
+                }
+                if(houses3[21] == 5){
+                    aI2$ -= 1200;
+                    aI3$ += 1200;
+                }
+            }
+        }
+        if( aI2Spot%40 == 30){
+            inJail2 = true;
+            aI2Spot -= 20;
+            pos2 = "Jail";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+        }
+        if( aI2Spot%40 == 31){
+            pos2 = "Pacific Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[22] == 0){
+                if( aI2$ >= prices[22]){
+                    owned[22] = 2;
+                    aI2$ -= prices[22];
+                }
+            }
+            if(owned[22] == 1){
+                if(houses[22] == 0){
+                    aI2$ -= 26;
+                    player$ += 26;
+                }
+                if(houses[22] == 1){
+                    aI2$ -= 130;
+                    player$ += 130;
+                }
+                if(houses[22] == 2){
+                    aI2$ -= 390;
+                    player$ += 390;
+                }
+                if(houses[22] == 3){
+                    aI2$ -= 900;
+                    player$ += 900;
+                }
+                if(houses[22] == 4){
+                    aI2$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[22] == 5){
+                    aI2$ -= 1275;
+                    player$ += 1275;
+                }
+            }
+            if(owned[22] == 2){
+                if(houses1[22] == 0){
+                    aI2$ -= 26;
+                    aI1$ += 26;
+                }
+                if(houses1[22] == 1){
+                    aI2$ -= 130;
+                    aI1$ += 130;
+                }
+                if(houses1[22] == 2){
+                    aI2$ -= 390;
+                    aI1$ += 390;
+                }
+                if(houses1[22] == 3){
+                    aI2$ -= 900;
+                    aI1$ += 900;
+                }
+                if(houses1[22] == 4){
+                    aI2$ -= 1100;
+                    aI1$ += 1100;
+                }
+                if(houses1[22] == 5){
+                    aI2$ -= 1275;
+                    aI1$ += 1275;
+                }
+            }
+            if(owned[22] == 4){
+                if(houses3[22] == 0){
+                    aI2$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[22] == 1){
+                    aI2$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[22] == 2){
+                    aI2$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[22] == 3){
+                    aI2$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[22] == 4){
+                    aI2$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[22] == 5){
+                    aI2$ -= 1275;
+                    aI3$ += 1275;
+                }
+            }
+        }
+        if( aI2Spot%40 == 32){
+            pos2 = "North Carolina Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[23] == 0){
+                if( aI2$ >= prices[23]){
+                    owned[23] = 2;
+                    aI2$ -= prices[23];
+                }
+            }
+            if(owned[23] == 1){
+                if(houses[23] == 0){
+                    aI2$ -= 26;
+                    player$ += 26;
+                }
+                if(houses[23] == 1){
+                    aI2$ -= 130;
+                    player$ += 130;
+                }
+                if(houses[23] == 2){
+                    aI2$ -= 390;
+                    player$ += 390;
+                }
+                if(houses[23] == 3){
+                    aI2$ -= 900;
+                    player$ += 900;
+                }
+                if(houses[23] == 4){
+                    aI2$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[23] == 5){
+                    aI2$ -= 1275;
+                    player$ += 1275;
+                }
+            }
+            if(owned[23] == 3){
+                if(houses1[23] == 0){
+                    aI2$ -= 26;
+                    aI1$ += 26;
+                }
+                if(houses1[23] == 1){
+                    aI2$ -= 130;
+                    aI1$ += 130;
+                }
+                if(houses1[23] == 2){
+                    aI2$ -= 390;
+                    aI1$ += 390;
+                }
+                if(houses1[23] == 3){
+                    aI2$ -= 900;
+                    aI1$ += 900;
+                }
+                if(houses1[23] == 4){
+                    aI2$ -= 1100;
+                    aI1$ += 1100;
+                }
+                if(houses1[23] == 5){
+                    aI2$ -= 1275;
+                    aI1$ += 1275;
+                }
+            }
+            if(owned[23] == 4){
+                if(houses3[23] == 0){
+                    aI2$ -= 26;
+                    aI3$ += 26;
+                }
+                if(houses3[23] == 1){
+                    aI2$ -= 130;
+                    aI3$ += 130;
+                }
+                if(houses3[23] == 2){
+                    aI2$ -= 390;
+                    aI3$ += 390;
+                }
+                if(houses3[23] == 3){
+                    aI2$ -= 900;
+                    aI3$ += 900;
+                }
+                if(houses3[23] == 4){
+                    aI2$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[23] == 5){
+                    aI2$ -= 1275;
+                    aI3$ += 1275;
+                }
+            }
+        }
+        if( aI2Spot%40 == 33){
+            pos2 = "Community Chest";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            communityChest();
+        }
+        if( aI2Spot%40 == 34){
+            pos2 = "Pennsylvania Avenue";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[24] == 0){
+                if( aI2$ >= prices[24]){
+                    owned[24] = 2;
+                    aI2$ -= prices[24];
+                }
+            }
+            if(owned[24] == 1){
+                if(houses[24] == 0){
+                    aI2$ -= 28;
+                    player$ += 28;
+                }
+                if(houses[24] == 1){
+                    aI2$ -= 150;
+                    player$ += 150;
+                }
+                if(houses[24] == 2){
+                    aI2$ -= 450;
+                    player$ += 450;
+                }
+                if(houses[24] == 3){
+                    aI2$ -= 1000;
+                    player$ += 1000;
+                }
+                if(houses[24] == 4){
+                    aI2$ -= 1200;
+                    player$ += 1200;
+                }
+                if(houses[24] == 5){
+                    aI2$ -= 1400;
+                    player$ += 1400;
+                }
+            }
+            if(owned[24] == 2){
+                if(houses1[24] == 0){
+                    aI2$ -= 28;
+                    aI1$ += 28;
+                }
+                if(houses1[24] == 1){
+                    aI2$ -= 150;
+                    aI1$ += 150;
+                }
+                if(houses1[24] == 2){
+                    aI2$ -= 450;
+                    aI1$ += 450;
+                }
+                if(houses1[24] == 3){
+                    aI2$ -= 1000;
+                    aI1$ += 1000;
+                }
+                if(houses1[24] == 4){
+                    aI2$ -= 1200;
+                    aI1$ += 1200;
+                }
+                if(houses1[24] == 5){
+                    aI2$ -= 1400;
+                    aI1$ += 1400;
+                }
+            }
+            if(owned[24] == 4){
+                if(houses3[24] == 0){
+                    aI2$ -= 28;
+                    aI3$ += 28;
+                }
+                if(houses3[24] == 1){
+                    aI2$ -= 150;
+                    aI3$ += 150;
+                }
+                if(houses3[24] == 2){
+                    aI2$ -= 450;
+                    aI3$ += 450;
+                }
+                if(houses3[24] == 3){
+                    aI2$ -= 1000;
+                    aI3$ += 1000;
+                }
+                if(houses3[24] == 4){
+                    aI2$ -= 1200;
+                    aI3$ += 1200;
+                }
+                if(houses3[24] == 5){
+                    aI2$ -= 1400;
+                    aI3$ += 1400;
+                }
+            }
+        }
+        if( aI2Spot%40 == 35){
+            pos2 = "Short Line Railroad";
+            aIPosBox2.setText("A.I.Pos 2: " + pos2);
+            if(owned[25] == 0){
+                if(aI2$ >= prices[25]){
+                    owned[25] = 2;
+                    aI2$ -= prices[25];
+                }
+            }
+            if(owned[25] == 1){
+                if(owned[2] == 1 && owned[10] == 1 && owned[17] == 1){
+                    aI2$ -= 200;
+                    player$ += 200;
+                    
+                }
+                else if((owned[2] == 1 && owned[10] == 1) || (owned[2] == 1 && owned[17] == 1) || owned[10] == 1 && owned[17] == 1){
+                    aI2$ -= 100;
+                    player$ += 100;
+                }
+                else if(owned[2] == 1 || owned[10] == 1 || owned[17] == 1){
+                    aI2$ -= 50;
+                    player$ += 50;
+                }
+                else aI2$ -= 25;
+                     player$ += 25;
+            }
+            if(owned[25] == 2){
+                if(owned[2] == 2 && owned[10] == 2 && owned[17] == 2){
+                    aI2$ -= 200;
+                    aI1$ += 200;
+                }
+                else if((owned[2] == 2 && owned[10] == 2) || (owned[2] == 2 && owned[17] == 2) || owned[10] == 2 && owned[17] == 2){
+                    aI2$ -= 100;
+                    aI1$ += 100;
+                }
+                else if(owned[2] == 2 || owned[10] == 2 || owned[17] == 2){
+                    aI2$ -= 50;
+                    aI1$ += 50;
+                }
+                else aI2$ -= 25;
+                     aI1$ += 25;
+            }
+            if(owned[25] == 4){
+                if(owned[2] == 4 && owned[10] == 4 && owned[17] == 4){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                else if((owned[2] == 4 && owned[10] == 4) || (owned[2] == 4 && owned[17] == 4) || owned[10] == 4 && owned[17] == 4){
+                    aI1$ -= 100;
+                    aI3$ += 100;
+                }
+                else if(owned[2] == 4 || owned[10] == 4 || owned[17] == 4){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                else aI1$ -= 25;
+                     aI3$ += 25;
+            }
+        }
+        if( aI1Spot%40 == 36){
+            pos1 = "Chance";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            chance();
+        }
+        if( aI1Spot%40 == 37){
+            pos1 = "Park Place";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[26] == 0){
+                if( aI1$ >= prices[26]){
+                    owned[26] = 2;
+                    aI1$ -= prices[26];
+                }
+            }
+            if(owned[26] == 1){
+                if(houses[26] == 0){
+                    aI1$ -= 35;
+                    player$ += 35;
+                }
+                if(houses[26] == 1){
+                    aI1$ -= 175;
+                    player$ += 175;
+                }
+                if(houses[26] == 2){
+                    aI1$ -= 500;
+                    player$ += 500;
+                }
+                if(houses[26] == 3){
+                    aI1$ -= 1100;
+                    player$ += 1100;
+                }
+                if(houses[26] == 4){
+                    aI1$ -= 1300;
+                    player$ += 1300;
+                }
+                if(houses[26] == 5){
+                    aI1$ -= 1500;
+                    player$ += 1500;
+                }
+            }
+            if(owned[26] == 3){
+                if(houses2[26] == 0){
+                    aI1$ -= 35;
+                    aI2$ += 35;
+                }
+                if(houses2[26] == 1){
+                    aI1$ -= 175;
+                    aI2$ += 175;
+                }
+                if(houses2[26] == 2){
+                    aI1$ -= 500;
+                    aI2$ += 500;
+                }
+                if(houses2[26] == 3){
+                    aI1$ -= 1100;
+                    aI2$ += 1100;
+                }
+                if(houses2[26] == 4){
+                    aI1$ -= 1300;
+                    aI2$ += 1300;
+                }
+                if(houses2[26] == 5){
+                    aI1$ -= 1500;
+                    aI2$ += 1500;
+                }
+            }
+            if(owned[26] == 4){
+                if(houses3[26] == 0){
+                    aI1$ -= 35;
+                    aI3$ += 35;
+                }
+                if(houses3[26] == 1){
+                    aI1$ -= 175;
+                    aI3$ += 175;
+                }
+                if(houses3[26] == 2){
+                    aI1$ -= 500;
+                    aI3$ += 500;
+                }
+                if(houses3[26] == 3){
+                    aI1$ -= 1100;
+                    aI3$ += 1100;
+                }
+                if(houses3[26] == 4){
+                    aI1$ -= 1300;
+                    aI3$ += 1300;
+                }
+                if(houses3[26] == 5){
+                    aI1$ -= 1500;
+                    aI3$ += 1500;
+                }
+            }
+        }
+        if( aI1Spot%40 == 38){
+            aI1$ -= 100;
+            freeParking += 100;
+            pos1 = "Luxury Tax";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+        }
+        if( aI1Spot%40 == 39){
+            pos1 = "Boardwalk";
+            aIPosBox1.setText("A.I.Pos 1: " + pos1);
+            if(owned[27] == 0){
+                if( aI1$ >= prices[27]){
+                    owned[27] = 2;
+                    aI1$ -= prices[27];
+                }
+            }
+            if(owned[27] == 1){
+                if(houses[27] == 0){
+                    aI1$ -= 50;
+                    player$ += 50;
+                }
+                if(houses[27] == 1){
+                    aI1$ -= 200;
+                    player$ += 200;
+                }
+                if(houses[27] == 2){
+                    aI1$ -= 600;
+                    player$ += 600;
+                }
+                if(houses[27] == 3){
+                    aI1$ -= 1400;
+                    player$ += 1400;
+                }
+                if(houses[27] == 4){
+                    aI1$ -= 1700;
+                    player$ += 1700;
+                }
+                if(houses[27] == 5){
+                    aI1$ -= 2000;
+                    player$ += 2000;
+                }
+            }
+            if(owned[27] == 3){
+                if(houses2[27] == 0){
+                    aI1$ -= 50;
+                    aI2$ += 50;
+                }
+                if(houses2[27] == 1){
+                    aI1$ -= 200;
+                    aI2$ += 200;
+                }
+                if(houses2[27] == 2){
+                    aI1$ -= 600;
+                    aI2$ += 600;
+                }
+                if(houses2[27] == 3){
+                    aI1$ -= 1400;
+                    aI2$ += 1400;
+                }
+                if(houses2[27] == 4){
+                    aI1$ -= 1700;
+                    aI2$ += 1700;
+                }
+                if(houses2[27] == 5){
+                    aI1$ -= 2000;
+                    aI2$ += 2000;
+                }
+            }
+            if(owned[27] == 4){
+                if(houses3[27] == 0){
+                    aI1$ -= 50;
+                    aI3$ += 50;
+                }
+                if(houses3[27] == 1){
+                    aI1$ -= 200;
+                    aI3$ += 200;
+                }
+                if(houses3[27] == 2){
+                    aI1$ -= 600;
+                    aI3$ += 600;
+                }
+                if(houses3[27] == 3){
+                    aI1$ -= 1400;
+                    aI3$ += 1400;
+                }
+                if(houses3[27] == 4){
+                    aI1$ -= 1700;
+                    aI3$ += 1700;
+                }
+                if(houses3[27] == 5){
+                    aI1$ -= 2000;
+                    aI3$ += 2000;
+                }
+            }
+        }
+        aI2M();
+        playerBox.setText("Player: $" + player$);
+        aIBox1.setText("A.I. 1: $" + aI1$);
+        aIBox2.setText("A.I. 2: $" + aI2$);
+        aIBox3.setText("A.I. 3: $" + aI3$);
+    }
+    public void aI3Turn(){
         
+        aI3M();
+        playerBox.setText("Player: $" + player$);
+        aIBox1.setText("A.I. 1: $" + aI1$);
+        aIBox2.setText("A.I. 2: $" + aI2$);
+        aIBox3.setText("A.I. 3: $" + aI3$);
+    }
+    public void communityChest(){
+        
+    }
+    public void chance(){
+        
+    }
+    public void pM(){
+        pMessage = "";
+        for(int i = 0; i < 28; i++){
+            if(owned[i] == 1 && (i == 2 || i == 7 || i == 10 || i == 17 || i == 20 || i == 25)){
+                pFormatted = String.format(props[i]);
+            }
+            else if(houses[i] < 5 && owned[i] == 1){
+                pFormatted = String.format(props[i] + " - " + houses[i] + " House(s)");
+            }
+            else if(houses[i] == 5 && owned[i] == 1){
+                pFormatted = String.format(props[i] + " - 1" + " Hotel");
+            }
+            pMessage += "\n"+pFormatted;
+        }
+        playerPropBox.setText(pMessage);
+    }
+    public void aI1M(){
+        aIMessage1 = "";
+        for(int i = 0; i < 28; i++){
+            if(owned[i] == 2 && (i == 2 || i == 7 || i == 10 || i == 17 || i == 20 || i == 25)){
+                aIFormatted1 = String.format(props[i]);
+            }
+            if(houses1[i] < 5 && owned[i] == 2){
+                aIFormatted1 = String.format(props[i] + " - " + houses1[i] + " House(s)");
+            }
+            if(houses1[i] == 5 && owned[i] == 2){
+                aIFormatted1 = String.format(props[i] + " - 1" + " Hotel");
+            }
+            aIMessage1 += "\n"+aIFormatted1;
+        }
+        aIPropBox1.setText(aIMessage1);
+    }
+    public void aI2M(){
+        aIMessage2 = "";
+        for(int i = 0; i < 28; i++){
+            if(owned[i] == 3 && (i == 2 || i == 7 || i == 10 || i == 17 || i == 20 || i == 25)){
+                aIFormatted2 = String.format(props[i]);
+            }
+            if(houses2[i] < 5 && owned[i] == 3){
+                aIFormatted2 = String.format(props[i] + " - " + houses2[i] + " House(s)");
+            }
+            if(houses2[i] == 5 && owned[i] == 3){
+                aIFormatted2 = String.format(props[i] + " - 1" + " Hotel");
+            }
+            aIMessage2 += "\n"+aIFormatted2;
+        }
+        aIPropBox2.setText(aIMessage2);
+    }
+    public void aI3M(){
+        aIMessage3 = "";
+        for(int i = 0; i < 28; i++){
+            if(owned[i] == 4 && (i == 2 || i == 7 || i == 10 || i == 17 || i == 20 || i == 25)){
+                aIFormatted3 = String.format(props[i]);
+            }
+            if(houses3[i] < 5 && owned[i] == 4){
+                aIFormatted3 = String.format(props[i] + " - " + houses3[i] + " House(s)");
+            }
+            if(houses3[i] == 5 && owned[i] == 4){
+                aIFormatted3 = String.format(props[i] + " - 1" + " Hotel");
+            }
+            aIMessage3 += "\n"+aIFormatted3;
+        }
+        aIPropBox3.setText(aIMessage3);
     }
     /**
      * @param args the command line arguments
@@ -702,9 +8662,17 @@ public class Monopoly extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel aIBox1;
+    private javax.swing.JLabel aIBox2;
+    private javax.swing.JLabel aIBox3;
+    private javax.swing.JLabel aIPosBox1;
+    private javax.swing.JLabel aIPosBox2;
+    private javax.swing.JLabel aIPosBox3;
+    private javax.swing.JTextArea aIPropBox1;
+    private javax.swing.JTextArea aIPropBox2;
+    private javax.swing.JTextArea aIPropBox3;
     private javax.swing.JLabel buyBox;
-    private javax.swing.JLabel computerBox1;
-    private javax.swing.JLabel computerBox2;
+    private javax.swing.JLabel cardBox;
     private javax.swing.JLabel computerBox3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -746,6 +8714,7 @@ public class Monopoly extends javax.swing.JFrame {
     private javax.swing.JButton jButton43;
     private javax.swing.JButton jButton44;
     private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -755,15 +8724,13 @@ public class Monopoly extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JLabel playerBox;
-    private javax.swing.JLabel playerBox1;
+    private javax.swing.JLabel playerPosBox;
+    private javax.swing.JTextArea playerPropBox;
     // End of variables declaration//GEN-END:variables
 }
